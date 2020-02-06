@@ -19,6 +19,7 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
     @IBOutlet weak var bundleIdTextField: NSTextField!
     @IBOutlet weak var useBundleIdCheckBox: NSButton!
     @IBOutlet weak var activityIndicator: NSProgressIndicator!
+    @IBOutlet weak var isEnterpriseRelease: NSButton!
 
     var appleSigner = AppleSigner()
 
@@ -37,7 +38,7 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
         xcarchiveTextField.del = self
         mobileprovisionTextField.del = self
         exportOptionsTextField.del = self
-        entitlementsTextField.del = self
+//        entitlementsTextField.del = self
 
         do {
             try appleSigner.getSigningIdentities(signingIdentityPopUp)
@@ -67,6 +68,12 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
             appleSigner.userProvidedBundleID = false
         }
 
+        if isEnterpriseRelease.state == .on {
+            appleSigner.isEnterpriseRelease = true
+        } else {
+            appleSigner.isEnterpriseRelease = false
+        }
+
         self.activityIndicator.increment(by: 1)
 
         appleSigner.signingIdentity = signingIdentityPopUp.selectedItem?.title
@@ -80,7 +87,7 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
         } catch BuildError.canNotListApps {
             postError("Unable to list apps in xcarchive")
             return
-        } catch BuildError.etitlements {
+        } catch BuildError.entitlements {
             postError("Unable to copy out entitlements.plist from archive")
             return
         } catch {
