@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 enum BuildError: Error {
-    case etitlements
+    case entitlements
     case mobileProvisionFile
     case exportoptions
     case embeddingMobileProvision
@@ -27,6 +27,8 @@ enum BuildError: Error {
     case canNotUnzipIPA
     case canNotzipIPA
     case canNotRemoveArcs
+    case canNotAddAssociatedDomains
+
 }
 
 struct AppleSigner {
@@ -46,9 +48,11 @@ struct AppleSigner {
 
             pathToEntitlementsPlist = self.saveLocation
             pathToEntitlementsPlist?.appendPathComponent("entitlements.plist")
+            pathToOriginalEntitlementsPlist = self.saveLocation
+            pathToOriginalEntitlementsPlist?.appendPathComponent("entitlements.plist")
 
             pathToExportOptionsForArchive = self.saveLocation
-            pathToExportOptionsForArchive?.appendPathComponent("exportOptions.plist")
+            pathToExportOptionsForArchive?.appendPathComponent("originalEntitlements.plist")
 
             userProvidedExportOptions = false
             userProvidedEntitlements = false
@@ -70,6 +74,8 @@ struct AppleSigner {
 
             pathToEntitlementsPlist = self.saveLocation
             pathToEntitlementsPlist?.appendPathComponent("entitlements.plist")
+            pathToOriginalEntitlementsPlist = self.saveLocation
+            pathToOriginalEntitlementsPlist?.appendPathComponent("originalEntitlements.plist")
 
             userProvidedExportOptions = false
             userProvidedEntitlements = false
@@ -80,6 +86,7 @@ struct AppleSigner {
 
     var pathToMobileProvisionForArchive: URL?
     var pathToEntitlementsPlist: URL?
+    var pathToOriginalEntitlementsPlist: URL?
     var pathToExportOptionsForArchive: URL?
 
     var signingIdentity: String?
@@ -92,6 +99,7 @@ struct AppleSigner {
     var userProvidedExportOptions = false
     var userProvidedEntitlements = false
     var userProvidedBuildNumber = false
+    var isEnterpriseRelease = false
 
     var delete = [String]()
 
@@ -117,7 +125,12 @@ struct AppleSigner {
 
             if let range = entry.range(of: pattern, options: .regularExpression) {
                 print("\(entry[range])")
-                signingIdentityPopUp.addItem(withTitle: "\(entry[range])")
+
+                if entry[range].contains("Distribution") {
+                    signingIdentityPopUp.insertItem(withTitle: "\(entry[range])", at: 0)
+                } else {
+                    signingIdentityPopUp.addItem(withTitle: "\(entry[range])")
+                }
             }
         }
     }
@@ -180,13 +193,17 @@ struct AppleSigner {
             }
 
             exportOptionsPlistData["generateAppStoreInformation"] = false
-            exportOptionsPlistData["method"] = "app-store"
+            exportOptionsPlistData["method"] = isEnterpriseRelease ? "enterprise" : "app-store"
             exportOptionsPlistData["signingCertificate"] = signingIdentity?.replacingOccurrences(of: "\"", with: "")
             exportOptionsPlistData["signingStyle"] = "manual"
             exportOptionsPlistData["stripSwiftSymbols"] = true
+            exportOptionsPlistData["compileBitcode"] = !isEnterpriseRelease
 
             exportOptionsPlistData["uploadBitcode"] = true
             exportOptionsPlistData["uploadSymbols"] = true
+
+            exportOptionsPlistData["destination"] = "export"
+            exportOptionsPlistData["thinning"] = "<none>"
 
             if let UUID = mobileProvisionPlistData["UUID"] {
                 exportOptionsPlistData["provisioningProfiles"] = [bundleID:UUID]
@@ -203,6 +220,34 @@ struct AppleSigner {
 
     //    MARK: - Shared signing functions
 
+    func copyAssociatedDomains() throws {
+
+        guard let originalPath = pathToOriginalEntitlementsPlist else { return }
+
+            var originalEntitlementsPlist: [String: AnyObject] = [:]
+
+            originalEntitlementsPlist = NSDictionary(contentsOf: originalPath) as! [String : AnyObject]
+
+            if let associatedDomains = originalEntitlementsPlist["com.apple.developer.associated-domains"] as? Array<Any> {
+                if associatedDomains.count > 0 {
+
+                    guard let entitlementsPath = pathToEntitlementsPlist else { return }
+
+                    var entitlementsPlist: [String: AnyObject] = [:]
+
+                    entitlementsPlist = NSDictionary(contentsOf: entitlementsPath) as! [String : AnyObject]
+
+                    entitlementsPlist["com.apple.developer.associated-domains"] = associatedDomains as AnyObject
+
+                    let plistContent = NSDictionary(dictionary: entitlementsPlist)
+                    let success:Bool = plistContent.write(to: entitlementsPath, atomically: true)
+
+                    if !success {
+                        throw BuildError.canNotAddAssociatedDomains
+                    }
+                }
+            }
+    }
 
     func reCodeSigning() throws {
 
@@ -318,6 +363,10 @@ struct AppleSigner {
 
         let fileURL = savePath.appendingPathComponent(file)
 
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            try? FileManager.default.removeItem(atPath: fileURL.path)
+        }
+
         if !FileManager.default.fileExists(atPath: fileURL.path) {
             FileManager.default.createFile(atPath: fileURL.path, contents: nil, attributes: nil)
         }
@@ -333,13 +382,18 @@ struct AppleSigner {
 
         mobileProvisionPlistData = NSDictionary(contentsOf: fileURL) as! [String : AnyObject]
 
-        if pathToEntitlementsPlist != nil {
+        if pathToEntitlementsPlist == nil {
             guard let entitlements = mobileProvisionPlistData["Entitlements"] as? [String: AnyObject] else {
                 throw BuildError.mobileProvisionFile
             }
 
+            pathToEntitlementsPlist = self.saveLocation
+            pathToEntitlementsPlist?.appendPathComponent("entitlements.plist")
+
             NSDictionary(dictionary: entitlements).write(to: pathToEntitlementsPlist!, atomically: true)
         }
+
+        try? copyAssociatedDomains()
     }
 
     mutating func retrieveEntitlements() throws {
@@ -360,10 +414,10 @@ struct AppleSigner {
             }
         }
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "codesign -d --entitlements :- \'\(pathToApp?.path ?? "")\' > \'\(pathToEntitlementsPlist?.path ?? "")\'"])
+        let response = runCommand(cmd: "/bin/sh", args: ["-c", "codesign -d --entitlements :- \'\(pathToApp?.path ?? "")\' > \'\(pathToOriginalEntitlementsPlist?.path ?? "")\'"])
 
         guard response.exitCode == 0 else {
-            throw BuildError.etitlements
+            throw BuildError.entitlements
         }
     }
 

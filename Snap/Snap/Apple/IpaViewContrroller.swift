@@ -51,6 +51,7 @@ class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision
     override func viewDidAppear() {
         super.viewDidAppear()
         bundleIdTextField.resignFirstResponder()
+
     }
 
 
@@ -59,6 +60,11 @@ class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision
         errorLabel.stringValue = ""
         activityIndicator.doubleValue = 0
         activityIndicator.isHidden = false
+
+        //clear entitlements if it isn't set
+        if entitlementsTextField.stringValue.count == 0 {
+            appleSigner.pathToEntitlementsPlist = nil
+        }
 
         if useBundleIdCheckBox.state == .on {
             appleSigner.bundleID = bundleIdTextField.stringValue
@@ -95,11 +101,17 @@ class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision
         postMsg("Extracting entitlements in progress")
 
         do {
+            if entitlementsTextField.stringValue.count == 0 {
+                appleSigner.userProvidedExportOptions = false
+            } else {
+                appleSigner.userProvidedExportOptions = true
+            }
+
             try appleSigner.retrieveEntitlements()
         } catch BuildError.canNotListApps {
             postError("Unable to list apps in ipa")
             return
-        } catch BuildError.etitlements {
+        } catch BuildError.entitlements {
             postError("Unable to copy out entitlements.plist from ipa")
             return
         } catch {
