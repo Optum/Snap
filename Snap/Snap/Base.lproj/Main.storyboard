@@ -887,7 +887,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FuR-7I-Dn3">
-                                <rect key="frame" x="554" y="58" width="132" height="18"/>
+                                <rect key="frame" x="554" y="48" width="132" height="18"/>
                                 <buttonCell key="cell" type="check" title="enterprise release" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ecS-eS-KwA">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -904,7 +904,7 @@
                             <constraint firstItem="c22-HH-ZPN" firstAttribute="trailing" secondItem="W3C-Z4-is9" secondAttribute="trailing" id="5jb-cd-3e0"/>
                             <constraint firstItem="OfL-yg-8kU" firstAttribute="top" secondItem="W3C-Z4-is9" secondAttribute="top" id="7Nd-x7-Wvl"/>
                             <constraint firstItem="FuR-7I-Dn3" firstAttribute="leading" secondItem="pZT-tY-FO0" secondAttribute="leading" id="8ny-mn-9kr"/>
-                            <constraint firstItem="FuR-7I-Dn3" firstAttribute="top" secondItem="pZT-tY-FO0" secondAttribute="bottom" constant="10" id="A5R-Ap-l31"/>
+                            <constraint firstItem="FuR-7I-Dn3" firstAttribute="top" secondItem="pZT-tY-FO0" secondAttribute="bottom" constant="20" id="A5R-Ap-l31"/>
                             <constraint firstItem="p0c-fB-U8Q" firstAttribute="top" secondItem="s5E-wW-7mj" secondAttribute="bottom" id="AkS-AL-Ccp"/>
                             <constraint firstItem="c22-HH-ZPN" firstAttribute="top" secondItem="u7w-uS-ix7" secondAttribute="bottom" constant="10" id="Bqx-kh-72v"/>
                             <constraint firstItem="mkt-43-cdo" firstAttribute="leading" secondItem="c22-HH-ZPN" secondAttribute="trailing" constant="50" id="CUO-sx-Vey"/>

@@ -125,7 +125,12 @@ struct AppleSigner {
 
             if let range = entry.range(of: pattern, options: .regularExpression) {
                 print("\(entry[range])")
-                signingIdentityPopUp.addItem(withTitle: "\(entry[range])")
+
+                if entry[range].contains("Distribution") {
+                    signingIdentityPopUp.insertItem(withTitle: "\(entry[range])", at: 0)
+                } else {
+                    signingIdentityPopUp.addItem(withTitle: "\(entry[range])")
+                }
             }
         }
     }
@@ -188,13 +193,17 @@ struct AppleSigner {
             }
 
             exportOptionsPlistData["generateAppStoreInformation"] = false
-            exportOptionsPlistData["method"] = "app-store"
+            exportOptionsPlistData["method"] = isEnterpriseRelease ? "enterprise" : "app-store"
             exportOptionsPlistData["signingCertificate"] = signingIdentity?.replacingOccurrences(of: "\"", with: "")
             exportOptionsPlistData["signingStyle"] = "manual"
             exportOptionsPlistData["stripSwiftSymbols"] = true
+            exportOptionsPlistData["compileBitcode"] = !isEnterpriseRelease
 
             exportOptionsPlistData["uploadBitcode"] = true
             exportOptionsPlistData["uploadSymbols"] = true
+
+            exportOptionsPlistData["destination"] = "export"
+            exportOptionsPlistData["thinning"] = "<none>"
 
             if let UUID = mobileProvisionPlistData["UUID"] {
                 exportOptionsPlistData["provisioningProfiles"] = [bundleID:UUID]
@@ -353,6 +362,10 @@ struct AppleSigner {
         }
 
         let fileURL = savePath.appendingPathComponent(file)
+
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            try? FileManager.default.removeItem(atPath: fileURL.path)
+        }
 
         if !FileManager.default.fileExists(atPath: fileURL.path) {
             FileManager.default.createFile(atPath: fileURL.path, contents: nil, attributes: nil)
