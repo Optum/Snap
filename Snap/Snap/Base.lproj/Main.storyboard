@@ -1271,7 +1271,7 @@
                                     <action selector="resignApk:" target="Xjg-6f-XYr" id="Ehs-gG-JPx"/>
                                 </connections>
                             </button>
-                            <secureTextField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kqK-0q-O82">
+                            <secureTextField identifier="keyFilePassword" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kqK-0q-O82">
                                 <rect key="frame" x="50" y="199" width="456" height="21"/>
                                 <secureTextFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Key File Password - Required" drawsBackground="YES" usesSingleLineMode="YES" id="KGB-RZ-LFj">
                                     <font key="font" metaFont="system"/>
@@ -1282,7 +1282,7 @@
                                     </allowedInputSourceLocales>
                                 </secureTextFieldCell>
                             </secureTextField>
-                            <secureTextField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s34-Pu-CvK">
+                            <secureTextField identifier="aliasFilePassword" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s34-Pu-CvK">
                                 <rect key="frame" x="50" y="117" width="456" height="21"/>
                                 <secureTextFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Alias Password - Required" drawsBackground="YES" usesSingleLineMode="YES" id="9ds-Ra-8kn">
                                     <font key="font" metaFont="system"/>
