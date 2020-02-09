@@ -21,6 +21,7 @@ If you don't want to build this project on your own, you can use the last build 
 ### Needed for iOS apps
 In order to export or resign an iOS application, you need to have your distribution certificate for the Apple App Store, and the mobile.provision file for the app. You need to have Xcode installed.
 
+##
 ### Google, Android
 1. Resign a .apk for Google Play Store
 2. Leaves a log.txt file in the directory next to the .apk file
