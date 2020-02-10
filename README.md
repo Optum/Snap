@@ -25,7 +25,7 @@ In order to export or resign an iOS application, you need to have your distribut
 
 ##
 ### Google, Android
-1. Resign a .apk for Google Play Store
+1. Resign an .apk for Google Play Store
 2. Leaves a log.txt file in the directory next to the .apk file
 
 ### Needed for Android apps 
