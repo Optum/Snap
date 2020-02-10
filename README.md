@@ -1,6 +1,4 @@
-# Snap
-
-![Snap Icon](https://github.com/Optum/Snap/blob/Chris/Icons/Snap/Snap/Assets.xcassets/AppIcon.appiconset/icon_16x16%402x.png)
+# Snap ![Snap Icon](https://github.com/Optum/Snap/blob/Chris/Icons/Snap/Snap/Assets.xcassets/AppIcon.appiconset/icon_128x128%402x.png)
 
 Snap is a Mac application that helps sign **iOS** and **Android** mobile apps for publishing to the app stores.  This app gives you the ability to select the files needed to resign your app, and then runs through the lengthy list of commands needed to for each scenario.
 
