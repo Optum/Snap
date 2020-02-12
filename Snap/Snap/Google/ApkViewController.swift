@@ -102,12 +102,25 @@ class ApkViewController: NSViewController, selectedAPK, selectedKeyFile, NSTextF
         googleSigner.aliasName = aliasPopUpButton.selectedItem?.title
 
         do {
-            try googleSigner.signApk()
+            try googleSigner.jarsignApk()
         } catch GoogleBuildError.canNotSignApk {
             postError("Could not sign apk")
             return
         }  catch {
             postError("generic error: ther was a problem trying to sign the apk")
+            return
+        }
+
+        postMsg("Aligning apk in progress")
+        self.activityIndicator.increment(by: 1)
+
+        do {
+            try googleSigner.finalZipalignApk()
+        } catch GoogleBuildError.canNotAlignApk {
+            postError("Could not align apk")
+            return
+        }  catch {
+            postError("generic error: ther was a problem trying to align the apk")
             return
         }
 
@@ -124,20 +137,25 @@ class ApkViewController: NSViewController, selectedAPK, selectedKeyFile, NSTextF
             return
         }
 
-        postMsg("Renaming apk in progress")
+//        postMsg("Renaming apk in progress")
+//        self.activityIndicator.increment(by: 1)
+//
+//        do {
+//            try googleSigner.renameVerifiedApk()
+//        } catch GoogleBuildError.canNotRenameApk {
+//            postError("Could not rename apk")
+//            return
+//        }  catch {
+//            postError("generic error: ther was a problem trying to rename the apk")
+//            return
+//        }
+
         self.activityIndicator.increment(by: 1)
 
         do {
-            try googleSigner.renameVerifiedApk()
-        } catch GoogleBuildError.canNotRenameApk {
-            postError("Could not rename apk")
-            return
-        }  catch {
-            postError("generic error: ther was a problem trying to rename the apk")
-            return
+            try? googleSigner.cleanup()
         }
 
-        self.activityIndicator.increment(by: 1)
         activityIndicator.isHidden = true
         activityIndicator.doubleValue = 0
 

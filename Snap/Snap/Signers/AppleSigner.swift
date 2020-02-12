@@ -49,7 +49,7 @@ struct AppleSigner {
             pathToEntitlementsPlist = self.saveLocation
             pathToEntitlementsPlist?.appendPathComponent("entitlements.plist")
             pathToOriginalEntitlementsPlist = self.saveLocation
-            pathToOriginalEntitlementsPlist?.appendPathComponent("entitlements.plist")
+            pathToOriginalEntitlementsPlist?.appendPathComponent("originalEntitlements.plist")
 
             pathToExportOptionsForArchive = self.saveLocation
             pathToExportOptionsForArchive?.appendPathComponent("originalEntitlements.plist")
@@ -382,7 +382,7 @@ struct AppleSigner {
 
         mobileProvisionPlistData = NSDictionary(contentsOf: fileURL) as! [String : AnyObject]
 
-        if pathToEntitlementsPlist == nil {
+        if pathToEntitlementsPlist != nil {
             guard let entitlements = mobileProvisionPlistData["Entitlements"] as? [String: AnyObject] else {
                 throw BuildError.mobileProvisionFile
             }
@@ -457,6 +457,41 @@ struct AppleSigner {
 
         guard response.exitCode == 0 else {
             throw BuildError.canNotUnzipIPA
+        }
+    }
+
+    //    MARK: - Cleanup functions
+
+    func cleanup() throws {
+
+        guard let savePath = self.saveLocation else {
+            throw BuildError.noLogFilePath
+        }
+
+        // Remove files
+        var file = "log.txt"
+
+        var fileURL = savePath.appendingPathComponent(file)
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            try? FileManager.default.removeItem(atPath: fileURL.path)
+        }
+
+        file = "mp.plist"
+        fileURL = savePath.appendingPathComponent(file)
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            try? FileManager.default.removeItem(atPath: fileURL.path)
+        }
+
+        if let pathToEntitle = pathToEntitlementsPlist {
+            if FileManager.default.fileExists(atPath: pathToEntitle.path ) {
+                try? FileManager.default.removeItem(atPath: pathToEntitle.path)
+            }
+        }
+
+        if let pathToOrigEntitle = pathToOriginalEntitlementsPlist {
+            if FileManager.default.fileExists(atPath: pathToOrigEntitle.path) {
+                try? FileManager.default.removeItem(atPath: pathToOrigEntitle.path)
+            }
         }
     }
 
@@ -548,7 +583,7 @@ struct AppleSigner {
 
         if let fileUpdater = try? FileHandle(forWritingTo: fileURL) {
 
-            fileUpdater.seekToEndOfFile()
+//            fileUpdater.seekToEndOfFile()
 
             fileUpdater.write(logString.data(using: .utf8)!)
             fileUpdater.write("\n\n".data(using: .utf8)!)
