@@ -126,9 +126,29 @@ struct GoogleSigner {
         }
     }
 
+    func jarsignApk() throws {
+
+    //        .jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore your-release-key.keystore android-release-unsigned.apk alias -storepass password
+
+            let response = runCommand(cmd: "/bin/sh", args: ["-c", "/usr/bin/jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore \'\(pathToKeyStore?.path ?? "")\' \'\(saveLocation?.path ?? "")/aligned_\(apkName ?? "").apk\' \(aliasName ?? "") -storepass \(keystorePwd ?? "")"])
+
+            guard response.exitCode == 0 else {
+                throw GoogleBuildError.canNotSignApk
+            }
+        }
+
+    func finalZipalignApk() throws {
+
+        let response = runCommand(cmd: "/bin/sh", args: ["-c", "\(pathToAppDir?.path ?? "")/contents/Resources/zipalign -f -v 4 \'\(saveLocation?.path ?? "")/aligned_\(apkName ?? "").apk\' \'\(saveLocation?.path ?? "")/aligned2_\(apkName ?? "").apk\'"])
+
+        guard response.exitCode == 0 else {
+            throw GoogleBuildError.canNotAlignApk
+        }
+    }
+
     func verifyApk() throws {
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "\(pathToAppDir?.path ?? "")/contents/Resources/zipalign -f -v 4 \'\(pathToAPK?.path ?? "")\' \'\(saveLocation?.path ?? "")/aligned_\(apkName ?? "").apk\'"])
+        let response = runCommand(cmd: "/bin/sh", args: ["-c", "\(pathToAppDir?.path ?? "")/contents/Resources/zipalign -f -v 4 \'\(saveLocation?.path ?? "")/aligned2_\(apkName ?? "").apk\' \'\(saveLocation?.path ?? "")/verified_aligned_\(apkName ?? "").apk\'"])
 
         guard response.exitCode == 0 else {
             throw GoogleBuildError.canNotVerifyApk
@@ -137,12 +157,43 @@ struct GoogleSigner {
 
     func renameVerifiedApk() throws {
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "mv \'\(saveLocation?.path ?? "")/aligned_\(apkName ?? "").apk\' \'\(saveLocation?.path ?? "")/aligned_resigned_verified_\(apkName ?? "").apk\'"])
+        let response = runCommand(cmd: "/bin/sh", args: ["-c", "mv \'\(saveLocation?.path ?? "")/aligned2_\(apkName ?? "").apk\' \'\(saveLocation?.path ?? "")/aligned_resigned_verified_\(apkName ?? "").apk\'"])
 
         guard response.exitCode == 0 else {
             throw GoogleBuildError.canNotRenameApk
         }
     }
+
+    //    MARK: - Cleanup functions
+
+    func cleanup() throws {
+
+        guard let savePath = self.saveLocation else {
+            throw BuildError.noLogFilePath
+        }
+
+        // Remove files
+        var file = "log.txt"
+
+        var fileURL = savePath.appendingPathComponent(file)
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            try? FileManager.default.removeItem(atPath: fileURL.path)
+        }
+
+        file = "aligned_\(apkName ?? "").apk"
+        fileURL = savePath.appendingPathComponent(file)
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            try? FileManager.default.removeItem(atPath: fileURL.path)
+        }
+
+        file = "aligned2_\(apkName ?? "").apk"
+        fileURL = savePath.appendingPathComponent(file)
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            try? FileManager.default.removeItem(atPath: fileURL.path)
+        }
+    }
+
+    //    MARK: - Shell and Logging
 
     func runCommand(cmd : String, args : [String]) -> (output: [String], error: [String]?, exitCode: Int32) {
 

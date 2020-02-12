@@ -210,6 +210,10 @@ class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision
         }
         self.activityIndicator.increment(by: 1)
 
+        do {
+            try? appleSigner.cleanup()
+        }
+        
         activityIndicator.isHidden = true
         activityIndicator.doubleValue = 0
 
