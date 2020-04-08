@@ -179,7 +179,7 @@ struct AppleSigner {
             throw BuildError.bundleid
         }
 
-        if !userProvidedExportOptions {
+        if pathToExportOptionsForArchive == nil {
 
             pathToExportOptionsForArchive = self.saveLocation
             pathToExportOptionsForArchive?.appendPathComponent("exportOptions.plist")
