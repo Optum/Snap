@@ -148,7 +148,7 @@ struct GoogleSigner {
 
     func verifyApk() throws {
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "\(pathToAppDir?.path ?? "")/contents/Resources/zipalign -f -v 4 \'\(saveLocation?.path ?? "")/aligned2_\(apkName ?? "").apk\' \'\(saveLocation?.path ?? "")/verified_aligned_\(apkName ?? "").apk\'"])
+        let response = runCommand(cmd: "/bin/sh", args: ["-c", "\(pathToAppDir?.path ?? "")/contents/Resources/zipalign -p -f -v 4 \'\(saveLocation?.path ?? "")/aligned2_\(apkName ?? "").apk\' \'\(saveLocation?.path ?? "")/verified_aligned_\(apkName ?? "").apk\'"])
 
         guard response.exitCode == 0 else {
             throw GoogleBuildError.canNotVerifyApk

@@ -51,8 +51,8 @@ struct AppleSigner {
             pathToOriginalEntitlementsPlist = self.saveLocation
             pathToOriginalEntitlementsPlist?.appendPathComponent("originalEntitlements.plist")
 
-            pathToExportOptionsForArchive = self.saveLocation
-            pathToExportOptionsForArchive?.appendPathComponent("originalEntitlements.plist")
+            pathToExportOptionsForArchive = nil
+//            pathToExportOptionsForArchive?.appendPathComponent("originalEntitlements.plist")
 
             userProvidedExportOptions = false
             userProvidedEntitlements = false
