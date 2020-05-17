@@ -8,12 +8,12 @@
 
 import Cocoa
 
-class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision, selectedEntitlements {
+class IpaViewContrroller: NSViewController, SelectedFile {
 
     @IBOutlet weak var errorLabel: NSTextField!
-    @IBOutlet weak var ipaTextField: DragNDropIPATextField!
-    @IBOutlet weak var mobileprovisionTextField: DragNDropProvisionTextField!
-    @IBOutlet weak var entitlementsTextField: DragNDropEntitlementsPlistTextField!
+    @IBOutlet weak var ipaTextField: DragNDropFiles!
+    @IBOutlet weak var mobileprovisionTextField: DragNDropFiles!
+    @IBOutlet weak var entitlementsTextField: DragNDropFiles!
     @IBOutlet weak var signingIdentityPopUp: NSPopUpButton!
     @IBOutlet weak var bundleIdTextField: NSTextField!
     @IBOutlet weak var useBundleIdCheckBox: NSButton!
@@ -36,8 +36,13 @@ class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision
         signingIdentityPopUp.removeAllItems()
 
         ipaTextField.del = self
+        ipaTextField.expectedExt = [.ipa]
+
         mobileprovisionTextField.del = self
+        mobileprovisionTextField.expectedExt = [.mobileprovision]
+
         entitlementsTextField.del = self
+        entitlementsTextField.expectedExt = [.plist]
 
         do {
             try appleSigner.getSigningIdentities(signingIdentityPopUp)
@@ -237,7 +242,7 @@ class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision
 
             if (result != nil) {
                 let path = result!.path
-                selectedIPA(path)
+                selectedFile(path, textField: ipaTextField)
             }
         } else {
             // User clicked on "Cancel"
@@ -262,7 +267,7 @@ class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision
 
             if (result != nil) {
                 let path = result!.path
-                selectedMobileProvision(path)
+                selectedFile(path, textField: mobileprovisionTextField)
             }
         } else {
             // User clicked on "Cancel"
@@ -287,7 +292,7 @@ class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision
 
             if (result != nil) {
                 let path = result!.path
-                selectedEntitlements(path)
+                selectedFile(path, textField: entitlementsTextField)
             }
         } else {
             // User clicked on "Cancel"
@@ -295,23 +300,25 @@ class IpaViewContrroller: NSViewController, selectedIPA, selectedMobileProvision
         }
     }
 
-    func selectedIPA(_ path: String) {
-        clearFields()
-        ipaTextField.stringValue = path
-        ipaTextField.abortEditing()
-        appleSigner.pathToIPA = URL(fileURLWithPath: path)
-    }
+    func selectedFile(_ path: String, textField: NSTextField) {
 
-    func selectedMobileProvision(_ path: String) {
-        mobileprovisionTextField.stringValue = path
-        appleSigner.pathToMobileProvisionForArchive = URL(fileURLWithPath: path)
-        mobileprovisionTextField.abortEditing()
-    }
-
-    func selectedEntitlements(_ path: String) {
-        entitlementsTextField.stringValue = path
-        appleSigner.pathToEntitlementsPlist = URL(fileURLWithPath: path)
-        entitlementsTextField.abortEditing()
+        switch textField {
+        case ipaTextField:
+            clearFields()
+            ipaTextField.stringValue = path
+            ipaTextField.abortEditing()
+            appleSigner.pathToIPA = URL(fileURLWithPath: path)
+        case mobileprovisionTextField:
+            mobileprovisionTextField.stringValue = path
+            appleSigner.pathToMobileProvisionForArchive = URL(fileURLWithPath: path)
+            mobileprovisionTextField.abortEditing()
+        case entitlementsTextField:
+            entitlementsTextField.stringValue = path
+            appleSigner.pathToEntitlementsPlist = URL(fileURLWithPath: path)
+            entitlementsTextField.abortEditing()
+        default:
+            break
+        }
     }
 
     func clearFields() {

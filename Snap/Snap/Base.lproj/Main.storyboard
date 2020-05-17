@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -748,9 +748,9 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3C-Z4-is9" customClass="DragNDropArchiveTextField" customModule="Snap" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3C-Z4-is9" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
                                 <rect key="frame" x="50" y="311" width="456" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.xcarchive - Required" drawsBackground="YES" id="rdB-Wu-ijZ">
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.xcarchive - Required" drawsBackground="YES" id="rdB-Wu-ijZ">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -774,9 +774,9 @@
                                     <action selector="selectXcarchive:" target="eJu-EO-AVW" id="SNr-Nn-DCv"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c22-HH-ZPN" customClass="DragNDropEntitlementsPlistTextField" customModule="Snap" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c22-HH-ZPN" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
                                 <rect key="frame" x="50" y="162" width="456" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Entitlements.plist - Optional" drawsBackground="YES" id="9hX-fY-sL8">
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Entitlements.plist - Optional" drawsBackground="YES" id="9hX-fY-sL8">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -792,9 +792,9 @@
                                     <action selector="selectEntitlements:" target="eJu-EO-AVW" id="CTx-eX-dX0"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esd-mH-jFd" customClass="DragNDropExportOptionsPlistTextField" customModule="Snap" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esd-mH-jFd" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
                                 <rect key="frame" x="50" y="121" width="456" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="ExportOptions.plist - Optional" drawsBackground="YES" id="1VK-OY-wIb">
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="ExportOptions.plist - Optional" drawsBackground="YES" id="1VK-OY-wIb">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -868,9 +868,9 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rN6-bd-P19" customClass="DragNDropProvisionTextField" customModule="Snap" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rN6-bd-P19" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
                                 <rect key="frame" x="50" y="270" width="456" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.mobileprovision - Required" drawsBackground="YES" id="n3W-Rk-erM">
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.mobileprovision - Required" drawsBackground="YES" id="n3W-Rk-erM">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -973,9 +973,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="800" height="427"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Frv-Wv-Piy" customClass="DragNDropIPATextField" customModule="Snap" customModuleProvider="target">
-                                <rect key="frame" x="50" y="318" width="194" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.ipa - Required" drawsBackground="YES" id="7Wp-ub-cYA">
+                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Frv-Wv-Piy" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
+                                <rect key="frame" x="50" y="318" width="456" height="21"/>
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.ipa - Required" drawsBackground="YES" id="7Wp-ub-cYA">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -990,7 +990,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="INW-3f-zOQ">
-                                <rect key="frame" x="288" y="311" width="468" height="32"/>
+                                <rect key="frame" x="550" y="311" width="206" height="32"/>
                                 <buttonCell key="cell" type="push" title="Select ipa" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tQJ-5R-YZ9">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -999,16 +999,16 @@
                                     <action selector="selectIPA:" target="ufZ-K3-Gbn" id="1un-KL-WwM"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gex-n3-IO5" customClass="DragNDropEntitlementsPlistTextField" customModule="Snap" customModuleProvider="target">
-                                <rect key="frame" x="50" y="169" width="194" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Entitlements.plist - Optional" drawsBackground="YES" id="bBi-1h-chd">
+                            <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gex-n3-IO5" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
+                                <rect key="frame" x="50" y="169" width="456" height="21"/>
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Entitlements.plist - Optional" drawsBackground="YES" id="bBi-1h-chd">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vyC-nR-OT8">
-                                <rect key="frame" x="288" y="162" width="468" height="32"/>
+                                <rect key="frame" x="550" y="162" width="206" height="32"/>
                                 <buttonCell key="cell" type="push" title="Select Entitlements.plist" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jiC-HL-kKx">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1033,16 +1033,16 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0r-es-QcJ" customClass="DragNDropProvisionTextField" customModule="Snap" customModuleProvider="target">
-                                <rect key="frame" x="50" y="277" width="194" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.mobileprovision - Required" drawsBackground="YES" id="Esr-lO-Sgb">
+                            <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0r-es-QcJ" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
+                                <rect key="frame" x="50" y="277" width="456" height="21"/>
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.mobileprovision - Required" drawsBackground="YES" id="Esr-lO-Sgb">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jy8-Wf-Lmz">
-                                <rect key="frame" x="288" y="270" width="468" height="32"/>
+                                <rect key="frame" x="550" y="270" width="206" height="32"/>
                                 <buttonCell key="cell" type="push" title="Select .mobileprovision File" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PG4-ec-x60">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1052,7 +1052,7 @@
                                 </connections>
                             </button>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w2d-bh-No6">
-                                <rect key="frame" x="48" y="233" width="199" height="25"/>
+                                <rect key="frame" x="48" y="233" width="461" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TfX-DI-n3r" id="GLs-w8-xAz">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -1074,7 +1074,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Av-PE-onl">
-                                <rect key="frame" x="50" y="128" width="194" height="21"/>
+                                <rect key="frame" x="50" y="128" width="456" height="21"/>
                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Bundle ID - Optional" drawsBackground="YES" usesSingleLineMode="YES" id="1h3-9E-3ac">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1082,14 +1082,14 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TaW-uP-iee">
-                                <rect key="frame" x="292" y="130" width="129" height="18"/>
+                                <rect key="frame" x="554" y="130" width="129" height="18"/>
                                 <buttonCell key="cell" type="check" title="use this bundle id" bezelStyle="regularSquare" imagePosition="left" inset="2" id="k1m-gv-2N8">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWS-pS-T9U">
-                                <rect key="frame" x="50" y="87" width="194" height="21"/>
+                                <rect key="frame" x="50" y="87" width="456" height="21"/>
                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Build Number - Optional" drawsBackground="YES" usesSingleLineMode="YES" id="Kqf-hw-dw6">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1097,7 +1097,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WNL-1x-t9T">
-                                <rect key="frame" x="292" y="89" width="150" height="18"/>
+                                <rect key="frame" x="554" y="89" width="150" height="18"/>
                                 <buttonCell key="cell" type="check" title="use this buld number" bezelStyle="regularSquare" imagePosition="left" inset="2" id="bWh-qd-syw">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1215,9 +1215,9 @@
                                     <action selector="selectApk:" target="Xjg-6f-XYr" id="bHT-W5-DxL"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKw-Ct-Wqe" customClass="DragNDropKeyFileTextField" customModule="Snap" customModuleProvider="target">
+                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKw-Ct-Wqe" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
                                 <rect key="frame" x="50" y="240" width="456" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Key File - Required" drawsBackground="YES" id="0yL-sN-Vgc">
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Key File - Required" drawsBackground="YES" id="0yL-sN-Vgc">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1301,9 +1301,9 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-Yc-IcJ" customClass="DragNDropApkTextField" customModule="Snap" customModuleProvider="target">
+                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-Yc-IcJ" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
                                 <rect key="frame" x="50" y="281" width="456" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.apk - Required" drawsBackground="YES" id="6yN-Fb-gzi">
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="foo.apk - Required" drawsBackground="YES" id="6yN-Fb-gzi">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

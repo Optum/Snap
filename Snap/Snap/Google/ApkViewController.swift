@@ -8,12 +8,12 @@
 
 import Cocoa
 
-class ApkViewController: NSViewController, selectedAPK, selectedKeyFile, NSTextFieldDelegate {
+class ApkViewController: NSViewController, NSTextFieldDelegate, SelectedFile {
 
     @IBOutlet weak var errorLabel: NSTextField!
-    @IBOutlet weak var apkTextField: DragNDropApkTextField!
+    @IBOutlet weak var apkTextField: DragNDropFiles!
 
-    @IBOutlet weak var keyFileTextField: DragNDropKeyFileTextField!
+    @IBOutlet weak var keyFileTextField: DragNDropFiles!
     @IBOutlet weak var keyFilePasswordTextField: NSSecureTextField!
 
     @IBOutlet weak var aliasPopUpButton: NSPopUpButton!
@@ -32,6 +32,12 @@ class ApkViewController: NSViewController, selectedAPK, selectedKeyFile, NSTextF
         activityIndicator.isIndeterminate = false
 
         keyFilePasswordTextField.delegate = self
+
+        apkTextField.del = self
+        apkTextField.expectedExt = [.apk]
+
+        keyFileTextField.del = self
+        keyFileTextField.expectedExt = [.keystore]
 
         errorLabel.stringValue = ""
 
@@ -222,7 +228,7 @@ class ApkViewController: NSViewController, selectedAPK, selectedKeyFile, NSTextF
 
             if (result != nil) {
                 let path = result!.path
-                selectedAPK(path)
+                selectedFile(path, textField: apkTextField)
             }
         } else {
             // User clicked on "Cancel"
@@ -247,7 +253,7 @@ class ApkViewController: NSViewController, selectedAPK, selectedKeyFile, NSTextF
 
             if (result != nil) {
                 let path = result!.path
-                selectedKeyFile(path)
+                selectedFile(path, textField: keyFileTextField)
             }
         } else {
             // User clicked on "Cancel"
@@ -255,19 +261,22 @@ class ApkViewController: NSViewController, selectedAPK, selectedKeyFile, NSTextF
         }
     }
 
-    func selectedAPK(_ path: String) {
-        clearFields()
-        apkTextField.stringValue = path
-        apkTextField.abortEditing()
-//        appleSigner.pathToIPA = URL(fileURLWithPath: path)
-    }
+    func selectedFile(_ path: String, textField: NSTextField) {
 
-    func selectedKeyFile(_ path: String) {
-        keyFileTextField.stringValue = path
-        keyFileTextField.abortEditing()
-        googleSigner.pathToKeyStore = URL(fileURLWithPath: path)
+        switch textField {
+        case apkTextField:
+            clearFields()
+            apkTextField.stringValue = path
+            apkTextField.abortEditing()
+        //        appleSigner.pathToIPA = URL(fileURLWithPath: path)
+        case keyFileTextField:
+            keyFileTextField.stringValue = path
+            keyFileTextField.abortEditing()
+            googleSigner.pathToKeyStore = URL(fileURLWithPath: path)
+        default:
+            break
+        }
     }
-
 
     func clearFields() {
 //        mobileprovisionTextField.stringValue = ""

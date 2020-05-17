@@ -8,13 +8,13 @@
 
 import Cocoa
 
-class ArchiveViewController: NSViewController, selectedArchive, selectedMobileProvision, selectedExportOptions, selectedEntitlements {
+class ArchiveViewController: NSViewController, SelectedFile {
 
     @IBOutlet weak var errorLabel: NSTextField!
-    @IBOutlet weak var xcarchiveTextField: DragNDropArchiveTextField!
-    @IBOutlet weak var entitlementsTextField: DragNDropEntitlementsPlistTextField!
-    @IBOutlet weak var exportOptionsTextField: DragNDropExportOptionsPlistTextField!
-    @IBOutlet weak var mobileprovisionTextField: DragNDropProvisionTextField!
+    @IBOutlet weak var xcarchiveTextField: DragNDropFiles!
+    @IBOutlet weak var entitlementsTextField: DragNDropFiles!
+    @IBOutlet weak var exportOptionsTextField: DragNDropFiles!
+    @IBOutlet weak var mobileprovisionTextField: DragNDropFiles!
     @IBOutlet weak var signingIdentityPopUp: NSPopUpButton!
     @IBOutlet weak var bundleIdTextField: NSTextField!
     @IBOutlet weak var useBundleIdCheckBox: NSButton!
@@ -36,9 +36,16 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
         signingIdentityPopUp.removeAllItems()
 
         xcarchiveTextField.del = self
+        xcarchiveTextField.expectedExt = [.xcarchive]
+
         mobileprovisionTextField.del = self
+        mobileprovisionTextField.expectedExt = [.mobileprovision]
+
         exportOptionsTextField.del = self
-//        entitlementsTextField.del = self
+        exportOptionsTextField.expectedExt = [.plist]
+
+        entitlementsTextField.del = self
+         entitlementsTextField.expectedExt = [.plist]
 
         do {
             try appleSigner.getSigningIdentities(signingIdentityPopUp)
@@ -216,7 +223,7 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
 
             if (result != nil) {
                 let path = result!.path
-                selectedArchive(path)
+                selectedFile(path, textField: xcarchiveTextField)
             }
         } else {
             // User clicked on "Cancel"
@@ -241,7 +248,7 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
 
             if (result != nil) {
                 let path = result!.path
-                selectedMobileProvision(path)
+                selectedFile(path, textField: mobileprovisionTextField)
             }
         } else {
             // User clicked on "Cancel"
@@ -266,7 +273,7 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
 
             if (result != nil) {
                 let path = result!.path
-                selectedEntitlements(path)
+                selectedFile(path, textField: entitlementsTextField)
             }
         } else {
             // User clicked on "Cancel"
@@ -291,7 +298,7 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
 
             if (result != nil) {
                 let path = result!.path
-                selectedExportOptions(path)
+                selectedFile(path, textField: exportOptionsTextField)
             }
         } else {
             // User clicked on "Cancel"
@@ -299,31 +306,29 @@ class ArchiveViewController: NSViewController, selectedArchive, selectedMobilePr
         }
     }
 
+    func selectedFile(_ path: String, textField: NSTextField) {
 
-
-    func selectedArchive(_ path: String) {
-        clearFields()
-        xcarchiveTextField.stringValue = path
-        xcarchiveTextField.abortEditing()
-        appleSigner.pathToArchive = URL(fileURLWithPath: path)
-    }
-
-    func selectedMobileProvision(_ path: String) {
-        mobileprovisionTextField.stringValue = path
-        appleSigner.pathToMobileProvisionForArchive = URL(fileURLWithPath: path)
-        mobileprovisionTextField.abortEditing()
-    }
-
-    func selectedExportOptions(_ path: String) {
-        exportOptionsTextField.stringValue = path
-        appleSigner.pathToExportOptionsForArchive = URL(fileURLWithPath: path)
-        exportOptionsTextField.abortEditing()
-    }
-
-    func selectedEntitlements(_ path: String) {
-        entitlementsTextField.stringValue = path
-        appleSigner.pathToEntitlementsPlist = URL(fileURLWithPath: path)
-        entitlementsTextField.abortEditing()
+        switch textField {
+        case xcarchiveTextField:
+            clearFields()
+            xcarchiveTextField.stringValue = path
+            xcarchiveTextField.abortEditing()
+            appleSigner.pathToArchive = URL(fileURLWithPath: path)
+        case entitlementsTextField:
+            entitlementsTextField.stringValue = path
+            appleSigner.pathToEntitlementsPlist = URL(fileURLWithPath: path)
+            entitlementsTextField.abortEditing()
+        case exportOptionsTextField:
+            exportOptionsTextField.stringValue = path
+            appleSigner.pathToExportOptionsForArchive = URL(fileURLWithPath: path)
+            exportOptionsTextField.abortEditing()
+        case mobileprovisionTextField:
+            mobileprovisionTextField.stringValue = path
+            appleSigner.pathToMobileProvisionForArchive = URL(fileURLWithPath: path)
+            mobileprovisionTextField.abortEditing()
+        default:
+            break
+        }
     }
 
     func clearFields() {

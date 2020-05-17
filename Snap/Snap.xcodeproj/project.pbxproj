@@ -8,14 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3746B85D236F0A1A00BCBD27 /* GoogleSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746B85C236F0A1A00BCBD27 /* GoogleSigner.swift */; };
-		3746B85F236F17A300BCBD27 /* DragNDropApkTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746B85E236F17A300BCBD27 /* DragNDropApkTextField.swift */; };
-		3746B861236F17BB00BCBD27 /* DragNDropKeyFileTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746B860236F17BB00BCBD27 /* DragNDropKeyFileTextField.swift */; };
-		375AC907236CECEE004F3850 /* DragNDropArchiveTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC906236CECEE004F3850 /* DragNDropArchiveTextField.swift */; };
-		375AC909236CF096004F3850 /* DragNDropExportOptionsPlistTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC908236CF096004F3850 /* DragNDropExportOptionsPlistTextField.swift */; };
-		375AC90C236CF133004F3850 /* DragNDropProvisionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC90B236CF133004F3850 /* DragNDropProvisionTextField.swift */; };
+		375AC907236CECEE004F3850 /* DragNDropFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC906236CECEE004F3850 /* DragNDropFiles.swift */; };
 		375AC90E236DBAE6004F3850 /* AppleSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC90D236DBAE6004F3850 /* AppleSigner.swift */; };
-		375AC910236DCEB9004F3850 /* DragNDropEntitlementsPlistTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC90F236DCEB9004F3850 /* DragNDropEntitlementsPlistTextField.swift */; };
-		375AC912236DDA1B004F3850 /* DragNDropIPATextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC911236DDA1B004F3850 /* DragNDropIPATextField.swift */; };
 		377B8DAA23EFB95200750D5F /* jarsigner in Resources */ = {isa = PBXBuildFile; fileRef = 377B8DA723EFB95100750D5F /* jarsigner */; };
 		377B8DAB23EFB95200750D5F /* zipalign in Resources */ = {isa = PBXBuildFile; fileRef = 377B8DA823EFB95100750D5F /* zipalign */; };
 		377B8DAC23EFB95200750D5F /* apksigner in Resources */ = {isa = PBXBuildFile; fileRef = 377B8DA923EFB95200750D5F /* apksigner */; };
@@ -31,14 +25,8 @@
 
 /* Begin PBXFileReference section */
 		3746B85C236F0A1A00BCBD27 /* GoogleSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSigner.swift; sourceTree = "<group>"; };
-		3746B85E236F17A300BCBD27 /* DragNDropApkTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropApkTextField.swift; sourceTree = "<group>"; };
-		3746B860236F17BB00BCBD27 /* DragNDropKeyFileTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropKeyFileTextField.swift; sourceTree = "<group>"; };
-		375AC906236CECEE004F3850 /* DragNDropArchiveTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropArchiveTextField.swift; sourceTree = "<group>"; };
-		375AC908236CF096004F3850 /* DragNDropExportOptionsPlistTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropExportOptionsPlistTextField.swift; sourceTree = "<group>"; };
-		375AC90B236CF133004F3850 /* DragNDropProvisionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropProvisionTextField.swift; sourceTree = "<group>"; };
+		375AC906236CECEE004F3850 /* DragNDropFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropFiles.swift; sourceTree = "<group>"; };
 		375AC90D236DBAE6004F3850 /* AppleSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSigner.swift; sourceTree = "<group>"; };
-		375AC90F236DCEB9004F3850 /* DragNDropEntitlementsPlistTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropEntitlementsPlistTextField.swift; sourceTree = "<group>"; };
-		375AC911236DDA1B004F3850 /* DragNDropIPATextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropIPATextField.swift; sourceTree = "<group>"; };
 		377B8DA723EFB95100750D5F /* jarsigner */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = jarsigner; path = ../Snap/JAVATools/jarsigner; sourceTree = "<group>"; };
 		377B8DA823EFB95100750D5F /* zipalign */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = zipalign; path = ../Snap/JAVATools/zipalign; sourceTree = "<group>"; };
 		377B8DA923EFB95200750D5F /* apksigner */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = apksigner; path = ../Snap/JAVATools/apksigner; sourceTree = "<group>"; };
@@ -69,13 +57,7 @@
 		375AC90A236CF0B2004F3850 /* DragDroppers */ = {
 			isa = PBXGroup;
 			children = (
-				375AC906236CECEE004F3850 /* DragNDropArchiveTextField.swift */,
-				375AC90B236CF133004F3850 /* DragNDropProvisionTextField.swift */,
-				375AC908236CF096004F3850 /* DragNDropExportOptionsPlistTextField.swift */,
-				375AC90F236DCEB9004F3850 /* DragNDropEntitlementsPlistTextField.swift */,
-				375AC911236DDA1B004F3850 /* DragNDropIPATextField.swift */,
-				3746B85E236F17A300BCBD27 /* DragNDropApkTextField.swift */,
-				3746B860236F17BB00BCBD27 /* DragNDropKeyFileTextField.swift */,
+				375AC906236CECEE004F3850 /* DragNDropFiles.swift */,
 			);
 			path = DragDroppers;
 			sourceTree = "<group>";
@@ -232,15 +214,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				37F19AE9235CA146009F8AD6 /* IpaViewContrroller.swift in Sources */,
-				375AC912236DDA1B004F3850 /* DragNDropIPATextField.swift in Sources */,
-				375AC907236CECEE004F3850 /* DragNDropArchiveTextField.swift in Sources */,
+				375AC907236CECEE004F3850 /* DragNDropFiles.swift in Sources */,
 				37F19AEC235CA1F9009F8AD6 /* ApkViewController.swift in Sources */,
 				375AC90E236DBAE6004F3850 /* AppleSigner.swift in Sources */,
-				375AC909236CF096004F3850 /* DragNDropExportOptionsPlistTextField.swift in Sources */,
-				375AC910236DCEB9004F3850 /* DragNDropEntitlementsPlistTextField.swift in Sources */,
-				375AC90C236CF133004F3850 /* DragNDropProvisionTextField.swift in Sources */,
-				3746B861236F17BB00BCBD27 /* DragNDropKeyFileTextField.swift in Sources */,
-				3746B85F236F17A300BCBD27 /* DragNDropApkTextField.swift in Sources */,
 				37F19ACB235C9F8D009F8AD6 /* ArchiveViewController.swift in Sources */,
 				3746B85D236F0A1A00BCBD27 /* GoogleSigner.swift in Sources */,
 				37F19AC9235C9F8D009F8AD6 /* AppDelegate.swift in Sources */,

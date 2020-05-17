@@ -1,11 +1,28 @@
 import Cocoa
 
-class DragNDropEntitlementsPlistTextField: NSTextField {
+protocol SelectedFile {
+    func selectedFile(_ path: String, textField: NSTextField)
+}
+
+enum DropFileType: String {
+    case apk = "apk"
+    case ipa = "ipa"
+    case keystore = "keystore"
+    case mobileprovision = "mobileprovision"
+    case plist = "plist"
+    case xcarchive = "xcarchive"
+
+    var displayName: String {
+        return self.rawValue as String
+    }
+}
+
+class DragNDropFiles: NSTextField {
 
     var filePath: String?
-    let expectedExt = ["plist"]  //file extensions allowed for Drag&Drop (example: "jpg","png","docx", etc..)
+    var expectedExt = [DropFileType]()  //file extensions allowed for Drag&Drop (example: "jpg","png","docx", etc..)
     var bgColor: CGColor?
-    var del: selectedEntitlements?
+    var del: SelectedFile?
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -29,6 +46,7 @@ class DragNDropEntitlementsPlistTextField: NSTextField {
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
         if checkExtension(sender) == true {
             self.layer?.backgroundColor = NSColor.darkGray.cgColor
+            self.textColor = .white
             return .copy
         } else {
             return NSDragOperation()
@@ -40,12 +58,14 @@ class DragNDropEntitlementsPlistTextField: NSTextField {
             let path = board[0] as? String
             else { return false }
 
-        let suffix = URL(fileURLWithPath: path).pathExtension
-        for ext in self.expectedExt {
-            if ext.lowercased() == suffix {
-                return true
+        if let suffix = DropFileType(rawValue: URL(fileURLWithPath: path).pathExtension) {
+            for ftype in self.expectedExt {
+                if ftype == suffix {
+                    return true
+                }
             }
         }
+
         return false
     }
 
@@ -62,14 +82,9 @@ class DragNDropEntitlementsPlistTextField: NSTextField {
             let path = pasteboard[0] as? String
             else { return false }
 
-        //GET YOUR FILE PATH !!!
         self.stringValue = path
-        del?.selectedEntitlements(path)
+        del?.selectedFile(path, textField: self)
 
         return true
     }
-}
-
-protocol selectedEntitlements {
-    func selectedEntitlements(_ path: String)
 }
