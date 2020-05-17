@@ -33,8 +33,13 @@ enum BuildError: Error {
 
 struct AppleSigner {
 
+    let cmdLine = CmdLine()
     var ipaName: String?
-    var saveLocation: URL?
+    var saveLocation: URL? {
+        didSet {
+            cmdLine.saveLocation = saveLocation
+        }
+    }
     var pathToApp: URL?
     var pathToIPABuildDir: URL?
     var pathToArchive: URL?  {
@@ -112,7 +117,7 @@ struct AppleSigner {
 
     func getSigningIdentities(_ signingIdentityPopUp: NSPopUpButton ) throws {
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "security find-identity -vp codesigning"])
+        let response = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "security find-identity -vp codesigning"])
 
         guard response.exitCode == 0 else {
             signingIdentityPopUp.isEnabled = false
@@ -139,13 +144,13 @@ struct AppleSigner {
 
     func exportIPA() throws {
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "xcodebuild -exportArchive -archivePath \'\(pathToArchive?.path ?? "")\' -exportPath \'\(self.saveLocation?.path ?? "")\' -exportOptionsPlist \'\(self.pathToExportOptionsForArchive?.path ?? "")\'"])
+        let response = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "xcodebuild -exportArchive -archivePath \'\(pathToArchive?.path ?? "")\' -exportPath \'\(self.saveLocation?.path ?? "")\' -exportOptionsPlist \'\(self.pathToExportOptionsForArchive?.path ?? "")\'"])
 
         guard response.exitCode == 0 else {
             throw BuildError.exporting
         }
 
-        let _ = runCommand(cmd: "/bin/sh", args: ["-c", "open \'\(self.saveLocation?.path ?? "")\'"])
+        let _ = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "open \'\(self.saveLocation?.path ?? "")\'"])
 
     }
 
@@ -251,16 +256,16 @@ struct AppleSigner {
 
     func reCodeSigning() throws {
 
-        let _ = runCommand(cmd: "/bin/sh", args: ["-c", "codesign -f -s \(signingIdentity ?? "") \(self.pathToApp?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "")/Frameworks/*"])
+        let _ = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "codesign -f -s \(signingIdentity ?? "") \(self.pathToApp?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "")/Frameworks/*"])
 
-        let _ = runCommand(cmd: "/bin/sh", args: ["-c", "codesign -f -s \(signingIdentity ?? "") --entitlements \(self.pathToEntitlementsPlist?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "") \(self.pathToApp?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "")"])
+        let _ = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "codesign -f -s \(signingIdentity ?? "") --entitlements \(self.pathToEntitlementsPlist?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "") \(self.pathToApp?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "")"])
 
     }
 
     func removeCodeSigning() throws {
 
-        let _ = runCommand(cmd: "/bin/sh", args: ["-c", "rm -rf \(self.pathToApp?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "")/Frameworks/*/_CodeSignature"])
-        let _ = runCommand(cmd: "/bin/sh", args: ["-c", "rm -rf \(self.pathToApp?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "")/_CodeSignature"])
+        let _ = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "rm -rf \(self.pathToApp?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "")/Frameworks/*/_CodeSignature"])
+        let _ = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "rm -rf \(self.pathToApp?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "")/_CodeSignature"])
     }
 
     func removeCodesignatures() throws {
@@ -269,9 +274,9 @@ struct AppleSigner {
             throw BuildError.removingCodeSigning
         }
 
-        let _ = shell("find \'\(dirPath)\' -type d -name _CodeSignature -exec rm -rf {} \\;")
+        let _ = cmdLine.shell("find \'\(dirPath)\' -type d -name _CodeSignature -exec rm -rf {} \\;")
 
-        try? log("Deleted ._CodeSignature files from \(dirPath) directory and subdirectories.\n")
+        try? cmdLine.log("Deleted ._CodeSignature files from \(dirPath) directory and subdirectories.\n")
 
     }
 
@@ -296,25 +301,25 @@ struct AppleSigner {
 
                 if !isDir.boolValue && fsNodeName.pathExtension == "dylib" {
 
-                    try? log(fsNodeName as String)
+                    try? cmdLine.log(fsNodeName as String)
                     let filePath = "\(dirPath)" + "/" + "\(fsNodeName)"
-                    let lsOutput = shell("lipo -info \'\(filePath)\'")
-                    try? log(lsOutput)
+                    let lsOutput = cmdLine.shell("lipo -info \'\(filePath)\'")
+                    try? cmdLine.log(lsOutput)
 
                     if lsOutput.contains("arm64e") {
-                        let lsOutput1 = shell("lipo \'\(filePath)\' -remove arm64e -output \'\(filePath)\'")
-                        try? log(lsOutput1)
-                        let lsOutput2 = shell("lipo -info \'\(filePath)\'")
-                        try? log("Cleaned --> \(lsOutput2)")
+                        let lsOutput1 = cmdLine.shell("lipo \'\(filePath)\' -remove arm64e -output \'\(filePath)\'")
+                        try? cmdLine.log(lsOutput1)
+                        let lsOutput2 = cmdLine.shell("lipo -info \'\(filePath)\'")
+                        try? cmdLine.log("Cleaned --> \(lsOutput2)")
                     }
 
                 }
 
             }
 
-            let _ = shell("find '\(dirPath)' -name .DS_Store -delete")
+            let _ = cmdLine.shell("find '\(dirPath)' -name .DS_Store -delete")
 
-            try? log("Deleted .DS_Store files from \(dirPath) directory and subdirectories.\n")
+            try? cmdLine.log("Deleted .DS_Store files from \(dirPath) directory and subdirectories.\n")
         }
     }
 
@@ -340,7 +345,7 @@ struct AppleSigner {
 
     func replaceEmbeddedProvisionFile () throws {
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "cp \'\(self.pathToMobileProvisionForArchive?.path ?? "")\' \'\(self.pathToApp?.path ?? "")/embedded.mobileprovision\'"])
+        let response = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "cp \'\(self.pathToMobileProvisionForArchive?.path ?? "")\' \'\(self.pathToApp?.path ?? "")/embedded.mobileprovision\'"])
 
         guard response.exitCode == 0 else {
             throw BuildError.embeddingMobileProvision
@@ -349,7 +354,7 @@ struct AppleSigner {
 
     mutating func createMobileProvisioningPlistFileAndCopyEntitlements () throws {
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "security cms -D -i \'\(pathToMobileProvisionForArchive?.path ?? "")\'"])
+        let response = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "security cms -D -i \'\(pathToMobileProvisionForArchive?.path ?? "")\'"])
 
         guard response.exitCode == 0 else {
             throw BuildError.canNotReadMobileProvisionFile
@@ -398,7 +403,7 @@ struct AppleSigner {
 
     mutating func retrieveEntitlements() throws {
 
-        let responseLs = runCommand(cmd: "/bin/sh", args: ["-c", "ls \'\(pathToApp?.path ?? "")\'"])
+        let responseLs = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "ls \'\(pathToApp?.path ?? "")\'"])
 
         guard responseLs.exitCode == 0 else {
             throw BuildError.canNotListApps
@@ -414,7 +419,7 @@ struct AppleSigner {
             }
         }
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "codesign -d --entitlements :- \'\(pathToApp?.path ?? "")\' > \'\(pathToOriginalEntitlementsPlist?.path ?? "")\'"])
+        let response = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "codesign -d --entitlements :- \'\(pathToApp?.path ?? "")\' > \'\(pathToOriginalEntitlementsPlist?.path ?? "")\'"])
 
         guard response.exitCode == 0 else {
             throw BuildError.entitlements
@@ -433,27 +438,27 @@ struct AppleSigner {
         }
 
         name = (saveLocation?.path.replacingOccurrences(of: " ", with: "\\ ") ?? "") + "/" + name.replacingOccurrences(of: " ", with: "\\ ")
-        try? log(name)
-        try? log(buildPath)
+        try? cmdLine.log(name)
+        try? cmdLine.log(buildPath)
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "cd \(buildPath); zip -r \(name) ."])
+        let response = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "cd \(buildPath); zip -r \(name) ."])
 
         guard response.exitCode == 0 else {
             throw BuildError.canNotzipIPA
         }
 
         if pathToIPABuildDir?.path != nil {
-            let _ = runCommand(cmd: "/bin/sh", args: ["-c", "rm -rf \'\(pathToIPABuildDir?.path ?? "")\'"])
+            let _ = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "rm -rf \'\(pathToIPABuildDir?.path ?? "")\'"])
         }
 
-        let _ = runCommand(cmd: "/bin/sh", args: ["-c", "open \'\(self.saveLocation?.path ?? "")\'"])
+        let _ = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "open \'\(self.saveLocation?.path ?? "")\'"])
     }
 
     func unzipIPA() throws {
 
-        let _ = runCommand(cmd: "/bin/sh", args: ["-c", "rm -rf \'\(pathToIPABuildDir?.path ?? "")\'"])
+        let _ = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "rm -rf \'\(pathToIPABuildDir?.path ?? "")\'"])
 
-        let response = runCommand(cmd: "/bin/sh", args: ["-c", "unzip -q \'\(pathToIPA?.path ?? "")\' -d \'\(pathToIPABuildDir?.path ?? "")\'"])
+        let response = cmdLine.runCommand(cmd: "/bin/sh", args: ["-c", "unzip -q \'\(pathToIPA?.path ?? "")\' -d \'\(pathToIPABuildDir?.path ?? "")\'"])
 
         guard response.exitCode == 0 else {
             throw BuildError.canNotUnzipIPA
@@ -493,122 +498,5 @@ struct AppleSigner {
                 try? FileManager.default.removeItem(atPath: pathToOrigEntitle.path)
             }
         }
-    }
-
-    //    MARK: - Shell and Logging
-
-    func runCommand(cmd : String, args : [String]) -> (output: [String], error: [String]?, exitCode: Int32) {
-
-        var output : [String] = []
-        var error : [String] = []
-
-        let task = Process()
-        task.launchPath = cmd
-        task.arguments = args
-
-        let outpipe = Pipe()
-        task.standardOutput = outpipe
-        let errpipe = Pipe()
-        task.standardError = errpipe
-
-        task.launch()
-
-        let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
-        if var string = String(data: outdata, encoding: .utf8) {
-            string = string.trimmingCharacters(in: .newlines)
-            output = string.components(separatedBy: "\n")
-        }
-
-        let errdata = errpipe.fileHandleForReading.readDataToEndOfFile()
-        if var string = String(data: errdata, encoding: .utf8), string.count > 0 {
-            string = string.trimmingCharacters(in: .newlines)
-            error = string.components(separatedBy: "\n")
-        }
-
-        task.waitUntilExit()
-        let status = task.terminationStatus
-
-        for arg in args {
-            do {
-                try log(arg)
-            }catch {
-                //                errorLabel.stringValue = "Unable to write to the log file"
-            }
-        }
-
-        if output.count > 0 {
-            try? log("output")
-            for out in output {
-                do {
-
-                    try log(out)
-                }catch {
-                    //                errorLabel.stringValue = "Unable to write to the log file"
-                }
-            }
-        }
-
-        if error.count > 0 {
-            for err in error where err.count > 0 {
-                do {
-                    try log(err)
-                }catch {
-                    //                errorLabel.stringValue = "Unable to write to the log file"
-                }
-            }
-        }
-
-        do {
-            try log("exitCode: \(status)")
-        }catch {
-            //                errorLabel.stringValue = "Unable to write to the log file"
-        }
-
-        return (output, error, status)
-    }
-
-    func log(_ logString: String) throws {
-
-        let file = "log.txt"
-
-        guard let savePath = self.saveLocation else {
-            throw BuildError.noLogFilePath
-        }
-
-        let fileURL = savePath.appendingPathComponent(file)
-
-        if !FileManager.default.fileExists(atPath: fileURL.path) {
-            FileManager.default.createFile(atPath: fileURL.path, contents: nil, attributes: nil)
-        }
-
-        if let fileUpdater = try? FileHandle(forWritingTo: fileURL) {
-
-//            fileUpdater.seekToEndOfFile()
-
-            fileUpdater.write(logString.data(using: .utf8)!)
-            fileUpdater.write("\n\n".data(using: .utf8)!)
-
-            fileUpdater.closeFile()
-        }
-    }
-
-    func shell(_ command: String) -> String {
-        let task = Process()
-        task.launchPath = "/bin/bash"
-        task.arguments = ["-c", command]
-
-        let pipe = Pipe()
-        task.standardOutput = pipe
-        task.launch()
-
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output: String = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-        return output
-
-    }
-
-    func say(_ words: String) {
-        //        var _ = runCommand(cmd: "/usr/bin/say", args: [words])
-        print(words)
     }
 }

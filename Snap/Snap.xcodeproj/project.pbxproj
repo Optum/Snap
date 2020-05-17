@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		373E33492471855800CE45A8 /* CmdLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373E33482471855800CE45A8 /* CmdLine.swift */; };
 		3746B85D236F0A1A00BCBD27 /* GoogleSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746B85C236F0A1A00BCBD27 /* GoogleSigner.swift */; };
 		375AC907236CECEE004F3850 /* DragNDropFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC906236CECEE004F3850 /* DragNDropFiles.swift */; };
 		375AC90E236DBAE6004F3850 /* AppleSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC90D236DBAE6004F3850 /* AppleSigner.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		373E33482471855800CE45A8 /* CmdLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdLine.swift; sourceTree = "<group>"; };
 		3746B85C236F0A1A00BCBD27 /* GoogleSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSigner.swift; sourceTree = "<group>"; };
 		375AC906236CECEE004F3850 /* DragNDropFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropFiles.swift; sourceTree = "<group>"; };
 		375AC90D236DBAE6004F3850 /* AppleSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSigner.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			children = (
 				375AC90D236DBAE6004F3850 /* AppleSigner.swift */,
 				3746B85C236F0A1A00BCBD27 /* GoogleSigner.swift */,
+				373E33482471855800CE45A8 /* CmdLine.swift */,
 			);
 			path = Signers;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				375AC907236CECEE004F3850 /* DragNDropFiles.swift in Sources */,
 				37F19AEC235CA1F9009F8AD6 /* ApkViewController.swift in Sources */,
 				375AC90E236DBAE6004F3850 /* AppleSigner.swift in Sources */,
+				373E33492471855800CE45A8 /* CmdLine.swift in Sources */,
 				37F19ACB235C9F8D009F8AD6 /* ArchiveViewController.swift in Sources */,
 				3746B85D236F0A1A00BCBD27 /* GoogleSigner.swift in Sources */,
 				37F19AC9235C9F8D009F8AD6 /* AppDelegate.swift in Sources */,

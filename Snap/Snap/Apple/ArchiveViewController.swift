@@ -25,28 +25,28 @@ class ArchiveViewController: NSViewController, SelectedFile {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         activityIndicator.isHidden = true
         activityIndicator.minValue = 0
         activityIndicator.maxValue = 11
         activityIndicator.isIndeterminate = false
-
+        
         errorLabel.stringValue = ""
-
+        
         signingIdentityPopUp.removeAllItems()
-
+        
         xcarchiveTextField.del = self
         xcarchiveTextField.expectedExt = [.xcarchive]
-
+        
         mobileprovisionTextField.del = self
         mobileprovisionTextField.expectedExt = [.mobileprovision]
-
+        
         exportOptionsTextField.del = self
         exportOptionsTextField.expectedExt = [.plist]
-
+        
         entitlementsTextField.del = self
-         entitlementsTextField.expectedExt = [.plist]
-
+        entitlementsTextField.expectedExt = [.plist]
+        
         do {
             try appleSigner.getSigningIdentities(signingIdentityPopUp)
         } catch {

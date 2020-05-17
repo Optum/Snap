@@ -22,7 +22,7 @@ class IpaViewContrroller: NSViewController, SelectedFile {
     @IBOutlet weak var activityIndicator: NSProgressIndicator!
 
     var appleSigner = AppleSigner()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
