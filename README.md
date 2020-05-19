@@ -26,7 +26,8 @@ In order to export or resign an iOS application, you need to have your distribut
 ##
 ### Google, Android
 1. Resign an .apk for Google Play Store
-2. Leaves a log.txt file in the directory next to the .apk file
+2. Resign using either a keystore or jks fils
+3. Leaves a log.txt file in the directory next to the .apk file
 
 ### Needed for Android apps 
 In order to align an apk for the Google Play Store, you need to have the .keystore file for the correct account you are distributing through.  You need to have Android Studio installed, and a JDK.
