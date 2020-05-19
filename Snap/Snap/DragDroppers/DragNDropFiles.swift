@@ -7,6 +7,7 @@ protocol SelectedFile {
 enum DropFileType: String {
     case apk = "apk"
     case ipa = "ipa"
+    case jks = "jks"
     case keystore = "keystore"
     case mobileprovision = "mobileprovision"
     case plist = "plist"

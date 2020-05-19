@@ -37,7 +37,7 @@ class ApkViewController: NSViewController, NSTextFieldDelegate, SelectedFile {
         apkTextField.expectedExt = [.apk]
 
         keyFileTextField.del = self
-        keyFileTextField.expectedExt = [.keystore]
+        keyFileTextField.expectedExt = [.jks, .keystore]
 
         errorLabel.stringValue = ""
 
