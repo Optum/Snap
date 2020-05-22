@@ -3,7 +3,8 @@
 
 Snap is a Mac application that helps sign **iOS** (xcarchive & ipa bundles) and **Android** (apk bundles) mobile apps for publishing to the app stores.  This app gives you the ability to select the files needed to resign your app, and then runs through the lengthy list of commands needed for each scenario.
 
-~~If you don't want to build this project on your own, you can use the last build saved in this zip file.~~
+## New feature
+### Snap now has a tab to upload iOS dSYM files to Firebase.
 
 ## What you need installed:
 1. Xcode

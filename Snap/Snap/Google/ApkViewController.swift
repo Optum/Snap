@@ -246,7 +246,7 @@ class ApkViewController: NSViewController, NSTextFieldDelegate, SelectedFile {
         dialog.canChooseDirectories    = true;
         dialog.canCreateDirectories    = false;
         dialog.allowsMultipleSelection = false;
-        dialog.allowedFileTypes        = ["keystore"];
+        dialog.allowedFileTypes        = ["keystore", "jks"];
 
         if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             let result = dialog.url // Pathname of the file

@@ -12,6 +12,7 @@ enum DropFileType: String {
     case mobileprovision = "mobileprovision"
     case plist = "plist"
     case xcarchive = "xcarchive"
+    case zip = "zip"
 
     var displayName: String {
         return self.rawValue as String

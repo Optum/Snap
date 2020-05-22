@@ -711,6 +711,7 @@
                     <tabViewItems>
                         <tabViewItem label="xcarchive" identifier="" id="2AS-Bx-tfb"/>
                         <tabViewItem label="ipa" identifier="" id="U1l-cd-mLF"/>
+                        <tabViewItem label="dSYM Upload" id="UdW-fb-569"/>
                         <tabViewItem label="apk" id="yUS-75-abA"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="n7B-AX-5Ar">
@@ -725,6 +726,7 @@
                         <outlet property="tabView" destination="n7B-AX-5Ar" id="Xm1-fT-f3t"/>
                         <segue destination="eJu-EO-AVW" kind="relationship" relationship="tabItems" id="GpR-89-3es"/>
                         <segue destination="ufZ-K3-Gbn" kind="relationship" relationship="tabItems" id="v5c-4f-vwv"/>
+                        <segue destination="yiE-VU-dqv" kind="relationship" relationship="tabItems" id="kPA-W3-SLq"/>
                         <segue destination="Xjg-6f-XYr" kind="relationship" relationship="tabItems" id="80o-Hu-D3W"/>
                     </connections>
                 </tabViewController>
@@ -965,10 +967,10 @@
             </objects>
             <point key="canvasLocation" x="171" y="862"/>
         </scene>
-        <!--Ipa View Contrroller-->
+        <!--Ipa View Controller-->
         <scene sceneID="NVA-Hn-kl8">
             <objects>
-                <viewController id="ufZ-K3-Gbn" customClass="IpaViewContrroller" customModule="Snap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ufZ-K3-Gbn" customClass="IpaViewController" customModule="Snap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="uex-2t-MUO">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="427"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1359,6 +1361,131 @@
                 <customObject id="qlL-zB-Ls2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1866" y="847"/>
+        </scene>
+        <!--Firebase View Controller-->
+        <scene sceneID="bpJ-kN-Xa2">
+            <objects>
+                <customObject id="ziT-l0-vqF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController id="yiE-VU-dqv" customClass="FirebaseViewController" customModule="Snap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="vUZ-2t-g9t">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="390"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lma-3t-NIk">
+                                <rect key="frame" x="78" y="354" width="644" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Upload dSYM file to Firebase" id="BhP-BA-pjg">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Se5-PY-GWc">
+                                <rect key="frame" x="550" y="274" width="206" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="194" id="Qaq-3H-UhP"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Select plist" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HPI-do-WaA">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectGoogleServiceInfo:" target="yiE-VU-dqv" id="rSX-Xr-xJK"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCx-tC-RNK" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
+                                <rect key="frame" x="50" y="240" width="456" height="21"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingMiddle" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="dSym.zip File - Required" drawsBackground="YES" id="fe8-2v-379">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAE-6u-oCv">
+                                <rect key="frame" x="550" y="233" width="206" height="32"/>
+                                <buttonCell key="cell" type="push" title="Select dSYM.zip file" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wg7-VF-rKN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="91r-jh-ff1">
+                                <rect key="frame" x="18" y="328" width="764" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="charWrapping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="Status Label" id="dn1-up-5rs">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0uu-Q7-QYA">
+                                <rect key="frame" x="392" y="81" width="16" height="16"/>
+                            </progressIndicator>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1eF-2C-Ci9">
+                                <rect key="frame" x="319" y="33" width="162" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="r6v-jX-Cf9"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Upload" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5Ph-zb-5Px">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="uploadFilesToFirebase:" target="yiE-VU-dqv" id="yUL-6F-gtp"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Dy-ec-eXq">
+                                <rect key="frame" x="48" y="312" width="59" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Required" id="IAm-Y7-SLn">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIx-1l-qLI" customClass="DragNDropFiles" customModule="Snap" customModuleProvider="target">
+                                <rect key="frame" x="50" y="281" width="456" height="21"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingMiddle" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="GoogleService-Info.plist - Required" drawsBackground="YES" id="2dY-6W-Di7">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="0Dy-ec-eXq" firstAttribute="top" secondItem="91r-jh-ff1" secondAttribute="bottom" id="0Wu-qw-Eci"/>
+                            <constraint firstItem="Se5-PY-GWc" firstAttribute="leading" secondItem="pIx-1l-qLI" secondAttribute="trailing" constant="50" id="5cA-c5-NeV"/>
+                            <constraint firstItem="Se5-PY-GWc" firstAttribute="top" secondItem="pIx-1l-qLI" secondAttribute="top" id="5f3-rE-ZKg"/>
+                            <constraint firstAttribute="trailing" secondItem="cAE-6u-oCv" secondAttribute="trailing" constant="50" id="6zo-xO-W98"/>
+                            <constraint firstItem="yCx-tC-RNK" firstAttribute="leading" secondItem="pIx-1l-qLI" secondAttribute="leading" id="781-Y8-DV8"/>
+                            <constraint firstItem="cAE-6u-oCv" firstAttribute="top" secondItem="yCx-tC-RNK" secondAttribute="top" id="7GM-pD-cuT"/>
+                            <constraint firstAttribute="trailing" secondItem="91r-jh-ff1" secondAttribute="trailing" constant="20" id="9Xm-VY-dYY"/>
+                            <constraint firstItem="0uu-Q7-QYA" firstAttribute="top" secondItem="yCx-tC-RNK" secondAttribute="bottom" constant="143" id="9s7-e1-oGo"/>
+                            <constraint firstItem="cAE-6u-oCv" firstAttribute="leading" secondItem="yCx-tC-RNK" secondAttribute="trailing" constant="50" id="ASc-Mx-lgk"/>
+                            <constraint firstItem="pIx-1l-qLI" firstAttribute="top" secondItem="0Dy-ec-eXq" secondAttribute="bottom" constant="10" id="DSe-tL-v2z"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1eF-2C-Ci9" secondAttribute="bottom" constant="30" id="Dh1-lf-jTw"/>
+                            <constraint firstAttribute="trailing" secondItem="Lma-3t-NIk" secondAttribute="trailing" constant="80" id="FvI-0t-fxb"/>
+                            <constraint firstItem="yCx-tC-RNK" firstAttribute="top" secondItem="pIx-1l-qLI" secondAttribute="bottom" constant="20" id="LlK-sp-pwN"/>
+                            <constraint firstItem="yCx-tC-RNK" firstAttribute="trailing" secondItem="pIx-1l-qLI" secondAttribute="trailing" id="SuJ-iN-tIZ"/>
+                            <constraint firstItem="Lma-3t-NIk" firstAttribute="top" secondItem="vUZ-2t-g9t" secondAttribute="top" constant="20" id="TqU-m8-XHt"/>
+                            <constraint firstItem="Lma-3t-NIk" firstAttribute="leading" secondItem="vUZ-2t-g9t" secondAttribute="leading" constant="80" id="VnP-uF-vyH"/>
+                            <constraint firstItem="pIx-1l-qLI" firstAttribute="leading" secondItem="vUZ-2t-g9t" secondAttribute="leading" constant="50" id="W9Q-ZB-Cel"/>
+                            <constraint firstItem="91r-jh-ff1" firstAttribute="top" secondItem="Lma-3t-NIk" secondAttribute="bottom" constant="10" id="aaB-44-gON"/>
+                            <constraint firstAttribute="trailing" secondItem="Se5-PY-GWc" secondAttribute="trailing" constant="50" id="bkh-hI-1lE"/>
+                            <constraint firstItem="1eF-2C-Ci9" firstAttribute="centerX" secondItem="vUZ-2t-g9t" secondAttribute="centerX" id="e0d-39-Dqd"/>
+                            <constraint firstItem="0uu-Q7-QYA" firstAttribute="centerX" secondItem="vUZ-2t-g9t" secondAttribute="centerX" id="fEY-QF-zTZ"/>
+                            <constraint firstItem="0Dy-ec-eXq" firstAttribute="leading" secondItem="vUZ-2t-g9t" secondAttribute="leading" constant="50" id="nRx-cg-Qvw"/>
+                            <constraint firstItem="1eF-2C-Ci9" firstAttribute="top" secondItem="0uu-Q7-QYA" secondAttribute="bottom" constant="20" id="w0D-0S-Q13"/>
+                            <constraint firstItem="91r-jh-ff1" firstAttribute="leading" secondItem="vUZ-2t-g9t" secondAttribute="leading" constant="20" id="xre-Bx-jQb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="0uu-Q7-QYA" id="Bmp-Qb-fSn"/>
+                        <outlet property="dSYMButton" destination="cAE-6u-oCv" id="Uyl-JF-kBE"/>
+                        <outlet property="dSYMTextField" destination="yCx-tC-RNK" id="mMg-h7-dcT"/>
+                        <outlet property="errorLabel" destination="91r-jh-ff1" id="rEr-Q4-jOV"/>
+                        <outlet property="plistButton" destination="Se5-PY-GWc" id="DNM-4W-m0a"/>
+                        <outlet property="servicePlistTextField" destination="pIx-1l-qLI" id="F4z-Fp-VMD"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1929" y="231"/>
         </scene>
     </scenes>
 </document>

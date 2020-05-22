@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370B02E5247815B500EBEEDA /* upload-symbols in Resources */ = {isa = PBXBuildFile; fileRef = 370B02E4247815B500EBEEDA /* upload-symbols */; };
+		370B02ED24781DBD00EBEEDA /* FirebaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B02EC24781DBD00EBEEDA /* FirebaseViewController.swift */; };
+		370B02EF24781DF000EBEEDA /* FirebaseUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B02EE24781DF000EBEEDA /* FirebaseUploader.swift */; };
 		373E33492471855800CE45A8 /* CmdLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373E33482471855800CE45A8 /* CmdLine.swift */; };
 		3746B85D236F0A1A00BCBD27 /* GoogleSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3746B85C236F0A1A00BCBD27 /* GoogleSigner.swift */; };
 		375AC907236CECEE004F3850 /* DragNDropFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AC906236CECEE004F3850 /* DragNDropFiles.swift */; };
@@ -19,12 +22,15 @@
 		37F19ACB235C9F8D009F8AD6 /* ArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F19ACA235C9F8D009F8AD6 /* ArchiveViewController.swift */; };
 		37F19ACD235C9F8E009F8AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37F19ACC235C9F8E009F8AD6 /* Assets.xcassets */; };
 		37F19AD0235C9F8E009F8AD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37F19ACE235C9F8E009F8AD6 /* Main.storyboard */; };
-		37F19AE9235CA146009F8AD6 /* IpaViewContrroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F19AE8235CA146009F8AD6 /* IpaViewContrroller.swift */; };
+		37F19AE9235CA146009F8AD6 /* IpaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F19AE8235CA146009F8AD6 /* IpaViewController.swift */; };
 		37F19AEC235CA1F9009F8AD6 /* ApkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F19AEA235CA1F9009F8AD6 /* ApkViewController.swift */; };
 		37F19AEF235CA519009F8AD6 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37F19AEE235CA519009F8AD6 /* exportOptions.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		370B02E4247815B500EBEEDA /* upload-symbols */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "upload-symbols"; sourceTree = "<group>"; };
+		370B02EC24781DBD00EBEEDA /* FirebaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseViewController.swift; sourceTree = "<group>"; };
+		370B02EE24781DF000EBEEDA /* FirebaseUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUploader.swift; sourceTree = "<group>"; };
 		373E33482471855800CE45A8 /* CmdLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdLine.swift; sourceTree = "<group>"; };
 		3746B85C236F0A1A00BCBD27 /* GoogleSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSigner.swift; sourceTree = "<group>"; };
 		375AC906236CECEE004F3850 /* DragNDropFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragNDropFiles.swift; sourceTree = "<group>"; };
@@ -40,7 +46,7 @@
 		37F19ACF235C9F8E009F8AD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37F19AD1235C9F8E009F8AD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37F19AD2235C9F8E009F8AD6 /* Snap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snap.entitlements; sourceTree = "<group>"; };
-		37F19AE8235CA146009F8AD6 /* IpaViewContrroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpaViewContrroller.swift; sourceTree = "<group>"; };
+		37F19AE8235CA146009F8AD6 /* IpaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpaViewController.swift; sourceTree = "<group>"; };
 		37F19AEA235CA1F9009F8AD6 /* ApkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApkViewController.swift; sourceTree = "<group>"; };
 		37F19AEE235CA519009F8AD6 /* exportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = exportOptions.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,12 +62,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		375AC90A236CF0B2004F3850 /* DragDroppers */ = {
+		370B02E32478159700EBEEDA /* FirebaseCrashlytics */ = {
+			isa = PBXGroup;
+			children = (
+				370B02E4247815B500EBEEDA /* upload-symbols */,
+			);
+			path = FirebaseCrashlytics;
+			sourceTree = "<group>";
+		};
+		370B02E6247816EC00EBEEDA /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				370B02EC24781DBD00EBEEDA /* FirebaseViewController.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		370B02E924781CEB00EBEEDA /* Uploaders */ = {
+			isa = PBXGroup;
+			children = (
+				370B02EE24781DF000EBEEDA /* FirebaseUploader.swift */,
+			);
+			path = Uploaders;
+			sourceTree = "<group>";
+		};
+		375AC90A236CF0B2004F3850 /* DragDrop */ = {
 			isa = PBXGroup;
 			children = (
 				375AC906236CECEE004F3850 /* DragNDropFiles.swift */,
 			);
-			path = DragDroppers;
+			path = DragDrop;
 			sourceTree = "<group>";
 		};
 		377B8DAD23EFB95700750D5F /* JavaTools */ = {
@@ -78,6 +108,7 @@
 		37F19ABC235C9F8D009F8AD6 = {
 			isa = PBXGroup;
 			children = (
+				370B02E32478159700EBEEDA /* FirebaseCrashlytics */,
 				377B8DAD23EFB95700750D5F /* JavaTools */,
 				37F19AC7235C9F8D009F8AD6 /* Snap */,
 				37F19AC6235C9F8D009F8AD6 /* Products */,
@@ -95,7 +126,9 @@
 		37F19AC7235C9F8D009F8AD6 /* Snap */ = {
 			isa = PBXGroup;
 			children = (
-				375AC90A236CF0B2004F3850 /* DragDroppers */,
+				370B02E924781CEB00EBEEDA /* Uploaders */,
+				370B02E6247816EC00EBEEDA /* Firebase */,
+				375AC90A236CF0B2004F3850 /* DragDrop */,
 				37F19AF0235E1C4C009F8AD6 /* Signers */,
 				37F19AE7235CA108009F8AD6 /* Google */,
 				37F19AE6235CA0FE009F8AD6 /* Apple */,
@@ -113,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				37F19ACA235C9F8D009F8AD6 /* ArchiveViewController.swift */,
-				37F19AE8235CA146009F8AD6 /* IpaViewContrroller.swift */,
+				37F19AE8235CA146009F8AD6 /* IpaViewController.swift */,
 			);
 			path = Apple;
 			sourceTree = "<group>";
@@ -200,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37F19ACD235C9F8E009F8AD6 /* Assets.xcassets in Resources */,
+				370B02E5247815B500EBEEDA /* upload-symbols in Resources */,
 				377B8DAC23EFB95200750D5F /* apksigner in Resources */,
 				37F19AEF235CA519009F8AD6 /* exportOptions.plist in Resources */,
 				377B8DAA23EFB95200750D5F /* jarsigner in Resources */,
@@ -216,12 +250,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37F19AE9235CA146009F8AD6 /* IpaViewContrroller.swift in Sources */,
+				37F19AE9235CA146009F8AD6 /* IpaViewController.swift in Sources */,
 				375AC907236CECEE004F3850 /* DragNDropFiles.swift in Sources */,
+				370B02EF24781DF000EBEEDA /* FirebaseUploader.swift in Sources */,
 				37F19AEC235CA1F9009F8AD6 /* ApkViewController.swift in Sources */,
 				375AC90E236DBAE6004F3850 /* AppleSigner.swift in Sources */,
 				373E33492471855800CE45A8 /* CmdLine.swift in Sources */,
 				37F19ACB235C9F8D009F8AD6 /* ArchiveViewController.swift in Sources */,
+				370B02ED24781DBD00EBEEDA /* FirebaseViewController.swift in Sources */,
 				3746B85D236F0A1A00BCBD27 /* GoogleSigner.swift in Sources */,
 				37F19AC9235C9F8D009F8AD6 /* AppDelegate.swift in Sources */,
 			);

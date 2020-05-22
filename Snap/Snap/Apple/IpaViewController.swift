@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class IpaViewContrroller: NSViewController, SelectedFile {
+class IpaViewController: NSViewController, SelectedFile {
 
     @IBOutlet weak var errorLabel: NSTextField!
     @IBOutlet weak var ipaTextField: DragNDropFiles!
