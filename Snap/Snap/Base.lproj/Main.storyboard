@@ -759,7 +759,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LuD-KJ-V3Q">
-                                <rect key="frame" x="78" y="384" width="199" height="16"/>
+                                <rect key="frame" x="78" y="384" width="644" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Export an ipa from an xcarchive" id="UR4-82-TPc">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -944,7 +944,7 @@
                             <constraint firstItem="mkt-43-cdo" firstAttribute="top" secondItem="c22-HH-ZPN" secondAttribute="top" id="nzE-qJ-TEi"/>
                             <constraint firstItem="Jvn-EH-G1G" firstAttribute="leading" secondItem="W3C-Z4-is9" secondAttribute="leading" id="oAk-ht-fpU"/>
                             <constraint firstItem="LuD-KJ-V3Q" firstAttribute="top" secondItem="3JY-8T-fyI" secondAttribute="top" constant="20" id="ubK-nF-1dZ"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LuD-KJ-V3Q" secondAttribute="trailing" symbolic="YES" id="wYI-Mg-21r"/>
+                            <constraint firstAttribute="trailing" secondItem="LuD-KJ-V3Q" secondAttribute="trailing" constant="80" id="wYI-Mg-21r"/>
                             <constraint firstItem="W3C-Z4-is9" firstAttribute="top" secondItem="p0c-fB-U8Q" secondAttribute="bottom" constant="10" id="ysY-de-MJA"/>
                             <constraint firstItem="esd-mH-jFd" firstAttribute="top" secondItem="c22-HH-ZPN" secondAttribute="bottom" constant="20" id="z1s-GZ-Ckc"/>
                             <constraint firstItem="mfo-HL-nNh" firstAttribute="centerX" secondItem="3JY-8T-fyI" secondAttribute="centerX" id="z5j-BZ-pDx"/>
