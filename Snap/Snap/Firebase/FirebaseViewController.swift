@@ -28,7 +28,7 @@ class FirebaseViewController: NSViewController, SelectedFile {
 
         activityIndicator.isHidden = true
         activityIndicator.minValue = 0
-        activityIndicator.maxValue = 10
+        activityIndicator.maxValue = 1
         activityIndicator.isIndeterminate = false
 
         errorLabel.stringValue = ""
@@ -44,8 +44,8 @@ class FirebaseViewController: NSViewController, SelectedFile {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        servicePlistTextField.resignFirstResponder()
-//        dSYMTextField.resignFirstResponder()
+
+        clearFields()
     }
 
 
@@ -69,7 +69,7 @@ class FirebaseViewController: NSViewController, SelectedFile {
         }
 
         activityIndicator.isHidden = true
-        activityIndicator.doubleValue = 0
+        activityIndicator.doubleValue = 1
 
         postMsg("Upload completed!")
     }
@@ -145,6 +145,11 @@ class FirebaseViewController: NSViewController, SelectedFile {
     func clearFields() {
         servicePlistTextField.stringValue = ""
         dSYMTextField.stringValue = ""
+        servicePlistTextField.abortEditing()
+        dSYMTextField.abortEditing()
+
+        servicePlistTextField.resignFirstResponder()
+        dSYMTextField.resignFirstResponder()
     }
 
     func postError(_ errorString: String ) {

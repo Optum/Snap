@@ -54,7 +54,8 @@ class ApkViewController: NSViewController, NSTextFieldDelegate, SelectedFile {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-//        bundleIdTextField.resignFirstResponder()
+
+        clearFields()
     }
 
 
@@ -282,6 +283,8 @@ class ApkViewController: NSViewController, NSTextFieldDelegate, SelectedFile {
 //        mobileprovisionTextField.stringValue = ""
 //        appleSigner.pathToMobileProvisionForArchive = nil
 
+        apkTextField.resignFirstResponder()
+        keyFileTextField.resignFirstResponder()
     }
 
     func postError(_ errorString: String ) {

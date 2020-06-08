@@ -58,7 +58,7 @@ class ArchiveViewController: NSViewController, SelectedFile {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        bundleIdTextField.resignFirstResponder()
+        clearFields()
     }
 
 
@@ -317,6 +317,7 @@ class ArchiveViewController: NSViewController, SelectedFile {
         case entitlementsTextField:
             entitlementsTextField.stringValue = path
             appleSigner.pathToEntitlementsPlist = URL(fileURLWithPath: path)
+
             entitlementsTextField.abortEditing()
         case exportOptionsTextField:
             exportOptionsTextField.stringValue = path
@@ -341,6 +342,11 @@ class ArchiveViewController: NSViewController, SelectedFile {
         bundleIdTextField.stringValue = ""
         appleSigner.bundleID = nil
         useBundleIdCheckBox.state = .off
+
+        xcarchiveTextField.resignFirstResponder()
+        entitlementsTextField.resignFirstResponder()
+        exportOptionsTextField.resignFirstResponder()
+        mobileprovisionTextField.resignFirstResponder()
     }
 
     func postError(_ errorString: String ) {

@@ -55,8 +55,7 @@ class IpaViewController: NSViewController, SelectedFile {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        bundleIdTextField.resignFirstResponder()
-
+        clearFields()
     }
 
 
@@ -336,6 +335,10 @@ class IpaViewController: NSViewController, SelectedFile {
         buildNumberTextField.stringValue = ""
         appleSigner.buildNumber = nil
         useBuildNumberCheckBox.state = .off
+
+        ipaTextField.resignFirstResponder()
+        mobileprovisionTextField.resignFirstResponder()
+        entitlementsTextField.resignFirstResponder()
     }
 
     func postError(_ errorString: String ) {

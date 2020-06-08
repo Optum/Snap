@@ -401,6 +401,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = N97UK65U9Y;
 				INFOPLIST_FILE = Snap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -408,7 +409,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snap.mac.snap;
 				PRODUCT_NAME = Snap;
 				SWIFT_VERSION = 5.0;
@@ -422,6 +423,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = N97UK65U9Y;
 				INFOPLIST_FILE = Snap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -429,7 +431,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snap.mac.snap;
 				PRODUCT_NAME = Snap;
 				SWIFT_VERSION = 5.0;
