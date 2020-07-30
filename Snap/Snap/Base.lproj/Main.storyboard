@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -737,7 +737,7 @@
                     <tabView key="tabView" type="noTabsNoBorder" id="n7B-AX-5Ar">
                         <rect key="frame" x="0.0" y="0.0" width="794" height="414"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <font key="font" metaFont="message"/>
+                        <font key="font" metaFont="system"/>
                         <connections>
                             <outlet property="delegate" destination="JeE-QW-Et9" id="I97-qx-9cV"/>
                         </connections>
@@ -854,7 +854,7 @@
                                 <rect key="frame" x="48" y="226" width="461" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="0yZ-gQ-Y1U" id="KJC-5h-jJd">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
+                                    <font key="font" metaFont="system"/>
                                     <menu key="menu" id="OIV-zs-VhM">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="0yZ-gQ-Y1U"/>
@@ -915,6 +915,13 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ini-cM-laT">
+                                <rect key="frame" x="554" y="14" width="197" height="18"/>
+                                <buttonCell key="cell" type="check" title="clean directory after building" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="69h-Oa-rUY">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="p0c-fB-U8Q" secondAttribute="trailing" constant="20" symbolic="YES" id="1rm-eh-bvh"/>
@@ -926,6 +933,7 @@
                             <constraint firstItem="c22-HH-ZPN" firstAttribute="trailing" secondItem="W3C-Z4-is9" secondAttribute="trailing" id="5jb-cd-3e0"/>
                             <constraint firstItem="OfL-yg-8kU" firstAttribute="top" secondItem="W3C-Z4-is9" secondAttribute="top" id="7Nd-x7-Wvl"/>
                             <constraint firstItem="FuR-7I-Dn3" firstAttribute="leading" secondItem="pZT-tY-FO0" secondAttribute="leading" id="8ny-mn-9kr"/>
+                            <constraint firstItem="ini-cM-laT" firstAttribute="leading" secondItem="FuR-7I-Dn3" secondAttribute="leading" id="9ty-qi-YIw"/>
                             <constraint firstItem="FuR-7I-Dn3" firstAttribute="top" secondItem="pZT-tY-FO0" secondAttribute="bottom" constant="20" id="A5R-Ap-l31"/>
                             <constraint firstItem="p0c-fB-U8Q" firstAttribute="top" secondItem="s5E-wW-7mj" secondAttribute="bottom" id="AkS-AL-Ccp"/>
                             <constraint firstItem="c22-HH-ZPN" firstAttribute="top" secondItem="u7w-uS-ix7" secondAttribute="bottom" constant="10" id="Bqx-kh-72v"/>
@@ -947,6 +955,7 @@
                             <constraint firstItem="04c-xG-cvg" firstAttribute="top" secondItem="esd-mH-jFd" secondAttribute="bottom" constant="20" id="Reo-2p-Qkt"/>
                             <constraint firstItem="OfL-yg-8kU" firstAttribute="leading" secondItem="W3C-Z4-is9" secondAttribute="trailing" constant="50" id="Rl0-VR-q4G"/>
                             <constraint firstItem="d5E-Lg-h19" firstAttribute="top" secondItem="mfo-HL-nNh" secondAttribute="bottom" constant="13" id="S7u-ld-lBo"/>
+                            <constraint firstItem="ini-cM-laT" firstAttribute="top" secondItem="FuR-7I-Dn3" secondAttribute="bottom" constant="20" id="WIY-aw-eMU"/>
                             <constraint firstItem="d5E-Lg-h19" firstAttribute="centerX" secondItem="3JY-8T-fyI" secondAttribute="centerX" id="WXX-ev-xcB"/>
                             <constraint firstItem="04c-xG-cvg" firstAttribute="trailing" secondItem="esd-mH-jFd" secondAttribute="trailing" id="Xcx-1u-vm0"/>
                             <constraint firstItem="c22-HH-ZPN" firstAttribute="leading" secondItem="W3C-Z4-is9" secondAttribute="leading" id="Yol-zs-ze7"/>
@@ -973,6 +982,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="mfo-HL-nNh" id="MKB-hV-641"/>
                         <outlet property="bundleIdTextField" destination="04c-xG-cvg" id="bbm-e1-cgV"/>
+                        <outlet property="cleanDir" destination="ini-cM-laT" id="waC-30-yjZ"/>
                         <outlet property="entitlementsTextField" destination="c22-HH-ZPN" id="q6l-Bc-bkD"/>
                         <outlet property="errorLabel" destination="s5E-wW-7mj" id="jCV-VU-I0j"/>
                         <outlet property="exportOptionsTextField" destination="esd-mH-jFd" id="Emb-uz-MP2"/>
@@ -1077,7 +1087,7 @@
                                 <rect key="frame" x="48" y="233" width="461" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TfX-DI-n3r" id="GLs-w8-xAz">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
+                                    <font key="font" metaFont="system"/>
                                     <menu key="menu" id="5Pq-VU-2EX">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="TfX-DI-n3r"/>
@@ -1141,6 +1151,13 @@
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="NkU-uT-Mbk">
                                 <rect key="frame" x="392" y="63" width="16" height="16"/>
                             </progressIndicator>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Cg3-GT-CyR">
+                                <rect key="frame" x="554" y="55" width="197" height="18"/>
+                                <buttonCell key="cell" type="check" title="clean directory after building" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="I13-2i-P28">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7Av-PE-onl" firstAttribute="top" secondItem="gex-n3-IO5" secondAttribute="bottom" constant="20" id="0Wa-wA-NZS"/>
@@ -1154,6 +1171,7 @@
                             <constraint firstAttribute="trailing" secondItem="jy8-Wf-Lmz" secondAttribute="trailing" constant="50" id="9CV-D8-Vl9"/>
                             <constraint firstItem="WNL-1x-t9T" firstAttribute="leading" secondItem="TaW-uP-iee" secondAttribute="leading" id="AHc-uq-h5d"/>
                             <constraint firstItem="xlB-H8-Lor" firstAttribute="top" secondItem="w2d-bh-No6" secondAttribute="bottom" constant="20" id="B0U-dC-TlC"/>
+                            <constraint firstItem="Cg3-GT-CyR" firstAttribute="top" secondItem="WNL-1x-t9T" secondAttribute="bottom" constant="20" id="BYK-JL-uE9"/>
                             <constraint firstItem="b0r-es-QcJ" firstAttribute="trailing" secondItem="Frv-Wv-Piy" secondAttribute="trailing" id="Cck-3S-rHr"/>
                             <constraint firstItem="7Av-PE-onl" firstAttribute="leading" secondItem="gex-n3-IO5" secondAttribute="leading" id="DaT-m2-ncp"/>
                             <constraint firstItem="INW-3f-zOQ" firstAttribute="top" secondItem="Frv-Wv-Piy" secondAttribute="top" id="H7b-5L-wgx"/>
@@ -1164,6 +1182,7 @@
                             <constraint firstItem="gex-n3-IO5" firstAttribute="leading" secondItem="w2d-bh-No6" secondAttribute="leading" id="Mp2-Dk-lfa"/>
                             <constraint firstItem="3HO-aq-gY9" firstAttribute="leading" secondItem="uex-2t-MUO" secondAttribute="leading" constant="20" id="NYc-w2-PAV"/>
                             <constraint firstItem="qdo-Pg-D24" firstAttribute="top" secondItem="3HO-aq-gY9" secondAttribute="bottom" id="Pj5-3E-EE9"/>
+                            <constraint firstItem="Cg3-GT-CyR" firstAttribute="leading" secondItem="WNL-1x-t9T" secondAttribute="leading" id="Pu9-lp-BRu"/>
                             <constraint firstItem="NkU-uT-Mbk" firstAttribute="top" secondItem="QWS-pS-T9U" secondAttribute="bottom" constant="8" id="QZs-BW-vJ3"/>
                             <constraint firstItem="g6z-x5-jcd" firstAttribute="top" secondItem="uex-2t-MUO" secondAttribute="top" constant="20" id="Rht-IF-gUH"/>
                             <constraint firstItem="QWS-pS-T9U" firstAttribute="top" secondItem="7Av-PE-onl" secondAttribute="bottom" constant="20" id="RxA-Q8-gj4"/>
@@ -1195,6 +1214,7 @@
                         <outlet property="activityIndicator" destination="NkU-uT-Mbk" id="jLV-ep-Fhs"/>
                         <outlet property="buildNumberTextField" destination="QWS-pS-T9U" id="pPp-83-LXy"/>
                         <outlet property="bundleIdTextField" destination="7Av-PE-onl" id="pPo-hW-j2f"/>
+                        <outlet property="cleanDir" destination="Cg3-GT-CyR" id="q6q-xt-aba"/>
                         <outlet property="entitlementsTextField" destination="gex-n3-IO5" id="GW5-57-Axe"/>
                         <outlet property="errorLabel" destination="3HO-aq-gY9" id="8nJ-a9-Qse"/>
                         <outlet property="ipaTextField" destination="Frv-Wv-Piy" id="0ZI-F2-Uqj"/>
@@ -1259,7 +1279,7 @@
                                 <rect key="frame" x="48" y="155" width="461" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Alias" alternateTitle="Alias" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="GXH-we-vT9" id="WvJ-7k-PJy">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
+                                    <font key="font" metaFont="system"/>
                                     <menu key="menu" id="M4k-Ap-HwN">
                                         <items>
                                             <menuItem title="Alias" state="on" id="GXH-we-vT9"/>

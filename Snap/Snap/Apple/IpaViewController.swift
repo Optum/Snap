@@ -20,6 +20,7 @@ class IpaViewController: NSViewController, SelectedFile {
     @IBOutlet weak var buildNumberTextField: NSTextField!
     @IBOutlet weak var useBuildNumberCheckBox: NSButton!
     @IBOutlet weak var activityIndicator: NSProgressIndicator!
+    @IBOutlet weak var cleanDir: NSButton!
 
     var appleSigner = AppleSigner()
     
@@ -43,6 +44,8 @@ class IpaViewController: NSViewController, SelectedFile {
 
         entitlementsTextField.del = self
         entitlementsTextField.expectedExt = [.plist]
+
+        cleanDir.state = .on
 
         do {
             try appleSigner.getSigningIdentities(signingIdentityPopUp)
@@ -82,6 +85,12 @@ class IpaViewController: NSViewController, SelectedFile {
             appleSigner.userProvidedBuildNumber = true
         } else {
             appleSigner.userProvidedBuildNumber = false
+        }
+
+        if cleanDir.state == .on {
+            appleSigner.cleanDir = true
+        } else {
+            appleSigner.cleanDir = false
         }
 
         self.activityIndicator.increment(by: 1)

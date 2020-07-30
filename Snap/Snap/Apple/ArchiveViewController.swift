@@ -20,6 +20,7 @@ class ArchiveViewController: NSViewController, SelectedFile {
     @IBOutlet weak var useBundleIdCheckBox: NSButton!
     @IBOutlet weak var activityIndicator: NSProgressIndicator!
     @IBOutlet weak var isEnterpriseRelease: NSButton!
+    @IBOutlet weak var cleanDir: NSButton!
 
     var appleSigner = AppleSigner()
 
@@ -46,6 +47,8 @@ class ArchiveViewController: NSViewController, SelectedFile {
         
         entitlementsTextField.del = self
         entitlementsTextField.expectedExt = [.plist]
+
+        cleanDir.state = .on
         
         do {
             try appleSigner.getSigningIdentities(signingIdentityPopUp)
@@ -81,6 +84,12 @@ class ArchiveViewController: NSViewController, SelectedFile {
             appleSigner.isEnterpriseRelease = false
         }
 
+        if cleanDir.state == .on {
+            appleSigner.cleanDir = true
+        } else {
+            appleSigner.cleanDir = false
+        }
+        
         self.activityIndicator.increment(by: 1)
 
         appleSigner.signingIdentity = signingIdentityPopUp.selectedItem?.title

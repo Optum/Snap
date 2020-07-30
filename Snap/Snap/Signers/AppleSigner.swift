@@ -105,6 +105,7 @@ struct AppleSigner {
     var userProvidedEntitlements = false
     var userProvidedBuildNumber = false
     var isEnterpriseRelease = false
+    var cleanDir = true
 
     var delete = [String]()
 
@@ -468,34 +469,38 @@ struct AppleSigner {
     //    MARK: - Cleanup functions
 
     func cleanup() throws {
-
-        guard let savePath = self.saveLocation else {
-            throw BuildError.noLogFilePath
-        }
-
-        // Remove files
-        var file = "log.txt"
-
-        var fileURL = savePath.appendingPathComponent(file)
-        if FileManager.default.fileExists(atPath: fileURL.path) {
-            try? FileManager.default.removeItem(atPath: fileURL.path)
-        }
-
-        file = "mp.plist"
-        fileURL = savePath.appendingPathComponent(file)
-        if FileManager.default.fileExists(atPath: fileURL.path) {
-            try? FileManager.default.removeItem(atPath: fileURL.path)
-        }
-
-        if let pathToEntitle = pathToEntitlementsPlist {
-            if FileManager.default.fileExists(atPath: pathToEntitle.path ) {
-                try? FileManager.default.removeItem(atPath: pathToEntitle.path)
+        
+        if cleanDir {
+            
+            guard let savePath = self.saveLocation else {
+                throw BuildError.noLogFilePath
             }
-        }
-
-        if let pathToOrigEntitle = pathToOriginalEntitlementsPlist {
-            if FileManager.default.fileExists(atPath: pathToOrigEntitle.path) {
-                try? FileManager.default.removeItem(atPath: pathToOrigEntitle.path)
+            
+            
+            // Remove files
+            var file = "log.txt"
+            
+            var fileURL = savePath.appendingPathComponent(file)
+            if FileManager.default.fileExists(atPath: fileURL.path) {
+                try? FileManager.default.removeItem(atPath: fileURL.path)
+            }
+            
+            file = "mp.plist"
+            fileURL = savePath.appendingPathComponent(file)
+            if FileManager.default.fileExists(atPath: fileURL.path) {
+                try? FileManager.default.removeItem(atPath: fileURL.path)
+            }
+            
+            if let pathToEntitle = pathToEntitlementsPlist {
+                if FileManager.default.fileExists(atPath: pathToEntitle.path ) {
+                    try? FileManager.default.removeItem(atPath: pathToEntitle.path)
+                }
+            }
+            
+            if let pathToOrigEntitle = pathToOriginalEntitlementsPlist {
+                if FileManager.default.fileExists(atPath: pathToOrigEntitle.path) {
+                    try? FileManager.default.removeItem(atPath: pathToOrigEntitle.path)
+                }
             }
         }
     }
